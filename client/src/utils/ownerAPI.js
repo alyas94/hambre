@@ -13,6 +13,10 @@ export default {
     return axios.post("/api/owner", ownerData);
   },
 
+  filter: function(filterTerms) {
+    return axios.get("/api/owner/filter", filterTerms);
+  },
+
   deleteOwner: function(id) {
     return axios.post("/api/owner/" + id);
   },
@@ -25,7 +29,11 @@ export default {
     return axios.put("/api/owner" + id, newLocation);
   },
 
-  truckActive: function(id, newlocation) {
-    return axios.update("/api/owner/" + id + "/active");
+  truckActive: function(id, newLocation) {
+    return axios.update("/api/owner/" + id + "/active", newLocation);
+  },
+
+  currentLocation: function(id, currentLocation) {
+    return axios.get("/api/owner/" + id + "/active", currentLocation);
   },
 };
