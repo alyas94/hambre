@@ -10,8 +10,8 @@ router
 
 router
   .route("/:id")
-  .delete(ownerController.deleteOnwer) //this will allow an owner to delte their account
-  .post(ownerController.newLocation) //this should create a new location for the owner, like the new notes that we did for the article scraper hw
+  .delete(ownerController.deleteOwner) //this will allow an owner to delte their account
+  .put(ownerController.newLocation) //this should create a new location for the owner, like the new notes that we did for the article scraper hw
   .update(ownerController.updateInformation); //this should allow the owner to update information in the database like menu, hours, etc. we might not need this for awhile
 
 module.exports = router;
