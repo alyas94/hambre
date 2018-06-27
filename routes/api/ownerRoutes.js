@@ -15,8 +15,9 @@ router
   .put(ownerController.newLocation) //this should create a new location for the owner, like the new notes that we did for the article scraper hw
   .update(ownerController.updateInformation); //this should allow the owner to update information in the database like menu, hours, etc. we might not need this for awhile
 
-
-router.route("/:id/location").update(ownerController.truckActive);
-
+router
+  .route("/:id/location")
+  .get(ownerController.currentLocation)
+  .update(ownerController.truckActive);
 
 module.exports = router;
