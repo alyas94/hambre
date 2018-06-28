@@ -5,10 +5,6 @@ export class MapContainer extends Component {
   state = {
     centerLat: 38.5727,
     centerLng: -121.4679,
-    northBound: "",
-    southBound: "",
-    eastBound: "",
-    westBound: "",
   };
   componentDidMount() {
     this.getCurrentLocation();
@@ -21,35 +17,23 @@ export class MapContainer extends Component {
     console.log("component updated!!");
   }
 
-  fuckYouGoogleApi(mapProps, map) {
+  fuckYouGoogleApi = (mapProps, map) => {
     const { google } = mapProps;
-    google.maps.event.addListener(map, "idle", function() {
+    google.maps.event.addListener(map, "idle", () => {
       var bounds = map.getBounds();
-      //   var bounds = { ne: bou.getNorthEast(), sw: bou.getSouthWest() };
-      console.log(bounds);
-      console.log(bounds.b.b);
-      //   this.setState({
-      var currentBounds = {
-        northBound: bounds.f.f,
-        southBound: bounds.f.b,
-        westBound: bounds.b.b,
-        eastBound: bounds.b.f,
-      };
-      console.log(JSON.stringify(currentBounds));
-      //   });
-
-      //   console.log(map.getBounds());
-      //   var bounds = map.getBounds();
-      //   var ne = bounds.getNorthEast(); // LatLng of the north-east corner
-      //   var sw = bounds.getSouthWest(); // LatLng of the south-west corder
-      //   var nw = new google.maps.LatLng(ne.lat(), sw.lng());
-      //   var se = new google.maps.LatLng(sw.lat(), ne.lng());
-      //   console.log(ne);
-      //   console.log(sw);
-      //   console.log(nw);
-      //   console.log(se);
+      this.updateBounds(bounds);
+      //   console.log(this.mapBounds);
     });
-  }
+  };
+
+  updateBounds = newBounds => {
+    this.mapBounds = {
+      northBound: newBounds.f.f,
+      southBound: newBounds.f.b,
+      westBound: newBounds.b.b,
+      eastBound: newBounds.b.f,
+    };
+  };
 
   getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(position => {
