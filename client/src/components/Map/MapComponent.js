@@ -5,7 +5,24 @@ export class MapContainer extends Component {
   state = {
     centerLat: 38.5727,
     centerLng: -121.4679,
+    trucks: [
+      {
+        name: "Temple Coffee",
+        position: {
+          lat: 38.5639,
+          lng: -121.4724,
+        },
+      },
+      {
+        name: "Miyagi Bar & Sushi",
+        position: {
+          lat: 38.5734,
+          lng: -121.4022,
+        },
+      },
+    ],
   };
+
   componentDidMount() {
     this.getCurrentLocation();
     let athing = this.props;
@@ -55,7 +72,21 @@ export class MapContainer extends Component {
         }}
         zoom={14}
         onReady={this.fuckYouGoogleApi}
-      />
+      >
+        {this.state.trucks.map(truck => {
+          return (
+            <Marker
+              name={truck.name}
+              position={truck.position}
+              icon={{
+                url: "../../../truck-catering.png",
+                anchor: new this.props.google.maps.Point(32, 32),
+                scaledSize: new this.props.google.maps.Size(40, 40),
+              }}
+            />
+          );
+        })}
+      </Map>
     );
   }
 }
