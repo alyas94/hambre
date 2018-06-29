@@ -29,4 +29,16 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findByLocation: function(req, res) {
+    console.log(req.body);
+    db.Owners.find(req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findByType: function(req, res) {
+    console.log(req.body);
+    db.Owners.find({ foodtype: req.params.foodtype })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 };
