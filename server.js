@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const path = require("path");
 const routes = require("./routes");
 const app = express();
+const jwt = require("jsonwebtoken");
+const exjwt = require("express-jwt");
 
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
