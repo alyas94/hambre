@@ -30,7 +30,7 @@ export default {
   },
 
   truckActive: function(id, newLocation) {
-    return axios.update("/api/owner/" + id + "/active", newLocation);
+    return axios.post("/api/owner/" + id + "/active", newLocation);
   },
 
   currentLocation: function(id, currentLocation) {
