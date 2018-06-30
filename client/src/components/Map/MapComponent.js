@@ -91,7 +91,7 @@ export class MapContainer extends Component {
       showingInfoWindow: false,
     });
 
-  fuckYouGoogleApi = (mapProps, map) => {
+  mapBoundsChangeListener = (mapProps, map) => {
     const { google } = mapProps;
     google.maps.event.addListener(map, "idle", () => {
       console.log("idling");
@@ -115,22 +115,22 @@ export class MapContainer extends Component {
     console.log(JSON.parse(sessionStorage.hambreCMB));
   };
 
-  trucksToList = (trucks, bounds) => {
-    let allTrucks = trucks;
-    let trucksToRender = [];
-    console.log(bounds);
-    for (var i = 0; i < allTrucks.length; i++) {
-      if (
-        allTrucks[i].position.lat < bounds.northBound &&
-        allTrucks[i].position.lat > bounds.southBound &&
-        allTrucks[i].position.lng < bounds.eastBound &&
-        allTrucks[i].position.lng > bounds.westBound
-      ) {
-        trucksToRender.push(allTrucks[i]);
-      }
-    }
-    this.listItemsToRender = trucksToRender;
-  };
+  //   trucksToList = (trucks, bounds) => {
+  //     let allTrucks = trucks;
+  //     let trucksToRender = [];
+  //     console.log(bounds);
+  //     for (var i = 0; i < allTrucks.length; i++) {
+  //       if (
+  //         allTrucks[i].position.lat < bounds.northBound &&
+  //         allTrucks[i].position.lat > bounds.southBound &&
+  //         allTrucks[i].position.lng < bounds.eastBound &&
+  //         allTrucks[i].position.lng > bounds.westBound
+  //       ) {
+  //         trucksToRender.push(allTrucks[i]);
+  //       }
+  //     }
+  //     this.listItemsToRender = trucksToRender;
+  //   };
 
   //Centers the map on user's current location
   getCurrentLocation = () => {
@@ -177,7 +177,7 @@ export class MapContainer extends Component {
           lng: this.state.centerLng,
         }}
         zoom={14}
-        onReady={this.fuckYouGoogleApi}
+        onReady={this.mapBoundsChangeListener}
         onClick={this.onMapClicked}
       >
         {this.state.trucks.map(truck => {
