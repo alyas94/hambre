@@ -23,4 +23,10 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  getFavorites: function(req, res) {
+    console.log(req.body);
+    db.Users.findOne({ _id: req.params.id })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 };
