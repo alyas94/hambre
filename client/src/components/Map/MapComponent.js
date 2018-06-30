@@ -11,6 +11,7 @@ export class MapContainer extends Component {
     selectedPlace: {},
     centerLat: "",
     centerLng: "",
+    currentLocation: {},
     trucks: [
       {
         name: "Temple Coffee",
@@ -136,10 +137,17 @@ export class MapContainer extends Component {
   getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(position => {
       console.log(position);
+      var currentPosition = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      console.log(currentPosition);
       this.setState({
         centerLat: position.coords.latitude,
         centerLng: position.coords.longitude,
+        currentLocation: currentPosition,
       });
+      console.log(this.state.currentLocation);
     });
   };
 
@@ -180,6 +188,13 @@ export class MapContainer extends Component {
         onReady={this.mapBoundsChangeListener}
         onClick={this.onMapClicked}
       >
+        <Marker
+          onClick={this.onMarkerClick}
+          name="User"
+          type=" "
+          description="Current user location"
+          position={this.state.currentLocation}
+        />
         {this.state.trucks.map(truck => {
           return (
             <Marker
