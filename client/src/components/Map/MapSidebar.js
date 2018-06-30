@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import MapSidebarItem from "./MapSidebarItem";
 
 const styles = {
   div: {
@@ -9,7 +10,7 @@ const styles = {
 
 class MapSidebar extends Component {
   state = {
-    itemsToRender: [],
+    toDisplay: [],
     trucks: [
       {
         name: "Temple Coffee",
@@ -34,13 +35,27 @@ class MapSidebar extends Component {
     ],
   };
   componentDidMount() {
-    this.sessionStorageListener();
+    this.sessionStorageListener(this.state.trucks);
   }
 
-  sessionStorageListener = () => {
-    var storageHandler = function(e) {
-      let newMapBounds = sessionStorage.getItem("hambreCMB");
-      console.log(JSON.parse(newMapBounds));
+  sessionStorageListener = trucks => {
+    var storageHandler = e => {
+      let newMapBounds = JSON.parse(sessionStorage.getItem("hambreCMB"));
+      console.log(newMapBounds);
+      var toDisplay = [];
+      for (var i = 0; i < trucks.length; i++) {
+        if (
+          trucks[i].position.lat < newMapBounds.northBound &&
+          trucks[i].position.lat > newMapBounds.southBound &&
+          trucks[i].position.lng < newMapBounds.westBound &&
+          trucks[i].position.lng > newMapBounds.eastBound
+        ) {
+          toDisplay.push(trucks[i]);
+        }
+      }
+      this.setState({
+        toDisplay: toDisplay,
+      });
       // console.log("sessionStorage changed!");
     };
 
@@ -50,7 +65,25 @@ class MapSidebar extends Component {
   render() {
     return (
       <ul style={styles.div} classname="list-group">
-        {this.props.children}
+        {this.state.toDisplay
+          ? this.state.toDisplay.map(truck => {
+              return (
+                <MapSidebarItem
+                  id={truck.id}
+                  name={truck.name}
+                  type={truck.type}
+                />
+              );
+            })
+          : this.state.trucks.map(truck => {
+              return (
+                <MapSidebarItem
+                  id={truck.id}
+                  name={truck.name}
+                  type={truck.type}
+                />
+              );
+            })}
       </ul>
     );
   }
