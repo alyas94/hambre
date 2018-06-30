@@ -78,6 +78,7 @@ class MapSidebar extends Component {
           : this.state.trucks.map(truck => {
               return (
                 <MapSidebarItem
+                  ket={truck.id}
                   id={truck.id}
                   name={truck.name}
                   type={truck.type}

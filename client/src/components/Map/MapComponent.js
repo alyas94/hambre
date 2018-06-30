@@ -36,7 +36,7 @@ export class MapContainer extends Component {
   };
 
   componentDidMount() {
-    this.sessionStorageTest();
+    this.sessionStorageRedefine();
     if (this.state.centerLat === "" && this.state.centerLng === "") {
       this.getCurrentLocation();
       //   this.updateBounds();
@@ -46,14 +46,13 @@ export class MapContainer extends Component {
     // console.log(athing);
   }
 
-  sessionStorageTest() {
+  sessionStorageRedefine = () => {
     var originalSetItem = sessionStorage.setItem;
 
     sessionStorage.setItem = function() {
       var event = new Event("itemInserted");
-      document.dispatchEvent(event);
-
       originalSetItem.apply(this, arguments);
+      document.dispatchEvent(event);
     };
 
     var storageHandler = function(e) {
@@ -61,7 +60,7 @@ export class MapContainer extends Component {
     };
 
     document.addEventListener("itemInserted", storageHandler, false);
-  }
+  };
 
   componentDidUpdate() {
     // this.centerMoved(mapProps, map);
@@ -95,6 +94,7 @@ export class MapContainer extends Component {
   fuckYouGoogleApi = (mapProps, map) => {
     const { google } = mapProps;
     google.maps.event.addListener(map, "idle", () => {
+      console.log("idling");
       var bounds = map.getBounds();
       console.log(bounds);
       this.updateBounds(bounds);
