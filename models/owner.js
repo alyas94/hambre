@@ -10,10 +10,7 @@ const ownerSchema = new Schema({
     required: true,
   },
   foodType: { type: String, required: true },
-  location: {
-    latitude: { type: Array, default: [], required: false },
-    longitude: { type: Array, default: [], required: false },
-  },
+  location: { type: Array, default: [] },
 
   truckActive: { type: Boolean, default: false },
 });
