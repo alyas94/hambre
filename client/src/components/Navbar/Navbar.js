@@ -30,7 +30,9 @@ function Navbar(props) {
           </Typography>
                   <Button color="inherit">Login</Button>
                   |
-          < Button color = "inherit" >Sign UP </Button>
+          < Button
+            id = "signup"
+                      color="inherit" >Sign UP </Button>
         </Toolbar>
       </AppBar>
     </div>
