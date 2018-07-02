@@ -24,7 +24,16 @@ module.exports = {
   },
   newLocation: function(req, res) {
     console.log(req.body);
-    db.Owners.insertOne({ _id: req.params.id })
+    db.Owners.update(
+      { _id: req.params.id },
+      {
+        $push: {
+          // pushing location from req.body into the location array
+          // $position 0 puts new location to 1st spot in the index
+          location: { $each: [req.body], $position: 0 },
+        },
+      }
+    )
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -34,15 +43,26 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findByLocation: function(req, res) {
-    console.log(req.body);
-    db.Owners.find(req.body)
+  currentLocation: function(req, res) {
+    db.Owners.find({ _id: req.params.id }, { location: { $slice: 1 } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findByType: function(req, res) {
     console.log(req.body);
-    db.Owners.find({ foodtype: req.params.foodtype })
+    db.Owners.find({ foodType: req.params.foodtype })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  trucksActive: function(req, res) {
+    console.log(req.body);
+    db.Owners.updateOne({ _id: req.params.id })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findActive: function(req, res) {
+    console.log(req.body);
+    db.Owners.find({ truckActive: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

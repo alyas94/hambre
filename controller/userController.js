@@ -19,7 +19,14 @@ module.exports = {
   },
   addFavorites: function(req, res) {
     console.log(req.body);
-    db.Users.updateOne({ _id: req.params.id })
+    db.Users.updateOne(
+      { _id: req.params.id },
+      {
+        $push: {
+          favorites: [req.body],
+        },
+      }
+    )
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
