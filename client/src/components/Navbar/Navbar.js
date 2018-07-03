@@ -8,15 +8,15 @@ import Button from "@material-ui/core/Button";
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   flex: {
-    flex: 1
+    flex: 1,
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20
-  }
+    marginRight: 20,
+  },
 };
 
 function Navbar(props) {
@@ -26,13 +26,15 @@ function Navbar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="title" color="inherit" className={classes.flex}>
-            Hambrè
+            <a id="logo" href="/">
+              Hambre
+            </a>
           </Typography>
-                  <Button color="inherit">Login</Button>
-                  |
-          < Button
-            id = "signup"
-                      color="inherit" >Sign UP </Button>
+          <Button color="inherit">Login</Button>
+          |
+          <Button id="signup" color="inherit">
+            Sign UP{" "}
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
@@ -40,7 +42,7 @@ function Navbar(props) {
 }
 
 Navbar.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Navbar);

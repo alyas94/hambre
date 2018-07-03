@@ -47,6 +47,21 @@ export class MapContainer extends Component {
     // console.log(athing);
   }
 
+  // loadVenues = () => {
+  //   API.allTrucks()
+  //     .then(res =>
+  //       this.setState({
+  //         trucks: res.data,
+  //         name: "",
+  //         id: "",
+  //         type: "",
+  //         description: "",
+  //         postion: {},
+  //       })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
+
   sessionStorageRedefine = () => {
     var originalSetItem = sessionStorage.setItem;
 
@@ -115,23 +130,6 @@ export class MapContainer extends Component {
     sessionStorage.setItem("hambreCMB", JSON.stringify(hambreCMB));
     console.log(JSON.parse(sessionStorage.hambreCMB));
   };
-
-  //   trucksToList = (trucks, bounds) => {
-  //     let allTrucks = trucks;
-  //     let trucksToRender = [];
-  //     console.log(bounds);
-  //     for (var i = 0; i < allTrucks.length; i++) {
-  //       if (
-  //         allTrucks[i].position.lat < bounds.northBound &&
-  //         allTrucks[i].position.lat > bounds.southBound &&
-  //         allTrucks[i].position.lng < bounds.eastBound &&
-  //         allTrucks[i].position.lng > bounds.westBound
-  //       ) {
-  //         trucksToRender.push(allTrucks[i]);
-  //       }
-  //     }
-  //     this.listItemsToRender = trucksToRender;
-  //   };
 
   //Centers the map on user's current location
   getCurrentLocation = () => {

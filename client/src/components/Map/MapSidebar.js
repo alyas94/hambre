@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MapSidebarItem from "./MapSidebarItem";
+import QueueAnim from "rc-queue-anim";
 
 const styles = {
   div: {
@@ -65,27 +66,29 @@ class MapSidebar extends Component {
   render() {
     return (
       <ul style={styles.div} className="list-group">
-        {this.state.toDisplay
-          ? this.state.toDisplay.map(truck => {
-              return (
-                <MapSidebarItem
-                  key={truck.id}
-                  id={truck.id}
-                  name={truck.name}
-                  type={truck.type}
-                />
-              );
-            })
-          : this.state.trucks.map(truck => {
-              return (
-                <MapSidebarItem
-                  key={truck.id}
-                  id={truck.id}
-                  name={truck.name}
-                  type={truck.type}
-                />
-              );
-            })}
+        <QueueAnim>
+          {this.state.toDisplay
+            ? this.state.toDisplay.map(truck => {
+                return (
+                  <MapSidebarItem
+                    key={truck.id}
+                    id={truck.id}
+                    name={truck.name}
+                    type={truck.type}
+                  />
+                );
+              })
+            : this.state.trucks.map(truck => {
+                return (
+                  <MapSidebarItem
+                    key={truck.id}
+                    id={truck.id}
+                    name={truck.name}
+                    type={truck.type}
+                  />
+                );
+              })}
+        </QueueAnim>
       </ul>
     );
   }
