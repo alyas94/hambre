@@ -5790,6 +5790,10 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-card-flipper@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-card-flipper/-/react-card-flipper-0.3.0.tgz#d10f42b0fbc495392b29a25d1e7c98322d8fb515"
+
 react-dev-utils@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-5.0.1.tgz#1f396e161fe44b595db1b186a40067289bf06613"

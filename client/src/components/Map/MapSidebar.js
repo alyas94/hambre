@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import MapSidebarItem from "./MapSidebarItem";
 import QueueAnim from "rc-queue-anim";
+import ReactCardFlipper from "react-card-flipper";
+import MSItemDesc from "./MSItemDesc";
 
 const styles = {
   div: {
-    float: "right",
-    width: "20vw",
+    // position: "relative",
+    // left: "70vw",
+    width: "26vw",
   },
 };
 
@@ -68,25 +71,19 @@ class MapSidebar extends Component {
       <ul style={styles.div} className="list-group">
         <QueueAnim>
           {this.state.toDisplay
-            ? this.state.toDisplay.map(truck => {
+            ? this.state.toDisplay.map((truck, props) => {
                 return (
                   <MapSidebarItem
                     key={truck.id}
                     id={truck.id}
                     name={truck.name}
                     type={truck.type}
+                    description={truck.description}
                   />
                 );
               })
             : this.state.trucks.map(truck => {
-                return (
-                  <MapSidebarItem
-                    key={truck.id}
-                    id={truck.id}
-                    name={truck.name}
-                    type={truck.type}
-                  />
-                );
+                return <p>No items currently</p>;
               })}
         </QueueAnim>
       </ul>

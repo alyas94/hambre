@@ -3,7 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
-
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*logo*/
 #logo {
   text-decoration: none;
 }
@@ -80,4 +81,21 @@ body {
   -webkit-transform: translateY(5px);
   transform: translateY(5px);
   /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*map-container*/
+.map-container {
+  width: 70vw;
+  height: 70vh;
+  border: solid;
+  border-color: black;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*viewListItem*/
+.viewListItem {
+  width: 23vw;
+  height: 13vh;
+  overflow: auto;
 }
