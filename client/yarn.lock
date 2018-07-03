@@ -6005,7 +6005,11 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
+<<<<<<< HEAD
 recompose@^0.27.0:
+=======
+"recompose@^0.26.0 || ^0.27.0", recompose@^0.27.0:
+>>>>>>> minor changes
   version "0.27.1"
   resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.27.1.tgz#1a49e931f183634516633bbb4f4edbfd3f38a7ba"
   dependencies:
