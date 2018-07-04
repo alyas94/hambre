@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import MapSidebarItem from "./MapSidebarItem";
 import QueueAnim from "rc-queue-anim";
-import ReactCardFlipper from "react-card-flipper";
 
 const styles = {
   div: {
