@@ -10,8 +10,8 @@ const style = {
   height: "70vh",
   width: "70vw",
   overflow: "auto",
-  margin: "2vh 0px 0px 26vw",
-  boxShadow: "-3px 5px 3px #dddddd",
+  margin: "15vh 0px 0px 26vw",
+  // boxShadow: "-3px 5px 3px #dddddd",
 };
 
 export class MapContainer extends Component {

@@ -12,7 +12,8 @@ class MapSidebarItem extends Component {
   render() {
     return (
       <li
-        onClick={this.showMSDescription}
+        onMouseOver={this.showMSDescription}
+        onMouseOut={this.showMSDescription}
         className="viewListItem"
         id={this.props.id}
       >

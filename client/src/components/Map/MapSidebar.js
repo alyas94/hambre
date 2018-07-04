@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import MapSidebarItem from "./MapSidebarItem";
 import QueueAnim from "rc-queue-anim";
 import ReactCardFlipper from "react-card-flipper";
-import MSItemDesc from "./MSItemDesc";
 
 const styles = {
   div: {
-    // position: "relative",
-    // left: "70vw",
+    margin: "7vh 3vw 0px 0px",
+    height: "70vh",
     width: "26vw",
   },
 };
@@ -68,8 +67,8 @@ class MapSidebar extends Component {
 
   render() {
     return (
-      <ul style={styles.div} className="list-group">
-        <QueueAnim>
+      <ul style={styles.div} className="sidebarList backgroundColor">
+        <QueueAnim className="backgroundColor">
           {this.state.toDisplay
             ? this.state.toDisplay.map((truck, props) => {
                 return (
