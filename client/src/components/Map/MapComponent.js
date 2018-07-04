@@ -4,6 +4,16 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 // import MapSidebarItem from "./MapSidebarItem";
 // import MapSidebarItem from "MapSidebar/MapSidebarItem";
 
+const boxShadow = "box-shadow";
+
+const style = {
+  height: "70vh",
+  width: "70vw",
+  overflow: "auto",
+  margin: "15vh 0px 0px 26vw",
+  // boxShadow: "-3px 5px 3px #dddddd",
+};
+
 export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
@@ -40,12 +50,23 @@ export class MapContainer extends Component {
     this.sessionStorageRedefine();
     if (this.state.centerLat === "" && this.state.centerLng === "") {
       this.getCurrentLocation();
-      //   this.updateBounds();
-      //   this.listItemsToRender(this.state.trucks, this.currentMapBouds);
     }
-    // let athing = this.props;
-    // console.log(athing);
   }
+
+  // loadVenues = () => {
+  //   API.allTrucks()
+  //     .then(res =>
+  //       this.setState({
+  //         trucks: res.data,
+  //         name: "",
+  //         id: "",
+  //         type: "",
+  //         description: "",
+  //         postion: {},
+  //       })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
 
   sessionStorageRedefine = () => {
     var originalSetItem = sessionStorage.setItem;
@@ -116,23 +137,6 @@ export class MapContainer extends Component {
     console.log(JSON.parse(sessionStorage.hambreCMB));
   };
 
-  //   trucksToList = (trucks, bounds) => {
-  //     let allTrucks = trucks;
-  //     let trucksToRender = [];
-  //     console.log(bounds);
-  //     for (var i = 0; i < allTrucks.length; i++) {
-  //       if (
-  //         allTrucks[i].position.lat < bounds.northBound &&
-  //         allTrucks[i].position.lat > bounds.southBound &&
-  //         allTrucks[i].position.lng < bounds.eastBound &&
-  //         allTrucks[i].position.lng > bounds.westBound
-  //       ) {
-  //         trucksToRender.push(allTrucks[i]);
-  //       }
-  //     }
-  //     this.listItemsToRender = trucksToRender;
-  //   };
-
   //Centers the map on user's current location
   getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -158,28 +162,10 @@ export class MapContainer extends Component {
   render() {
     // let listItemsToRender = this.trucksToList(this.state.trucks, this.bounds);
     return (
-      //   <div>
-      //     <MapSidebar
-      //       listItemsToRender={this.listItemsToRender}
-      //       onLoad={this.logThatShit(this.listItemsToRender)}
-      //     >
-      //       {this.props.listItemsToRender ? (
-      //         this.props.listItemsToRender.map(truck => {
-      //           return (
-      //             <MapSidebarItem
-      //               id={truck.id}
-      //               name={truck.name}
-      //               type={truck.type}
-      //             />
-      //           );
-      //         })
-      //       ) : (
-      //         <p>no current items </p>
-      //       )}
-      //     </MapSidebar>
       <Map
+        className="border"
         google={this.props.google}
-        style={{ height: "70vh", width: "70vw", float: "right" }}
+        style={style}
         center={{
           lat: this.state.centerLat,
           lng: this.state.centerLng,
@@ -226,7 +212,6 @@ export class MapContainer extends Component {
           </div>
         </InfoWindow>
       </Map>
-      //   </div>
     );
   }
 }
