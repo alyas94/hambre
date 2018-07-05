@@ -7,11 +7,13 @@ import Navbar from "../components/Navbar/Navbar";
 class MapPage extends Component {
   render() {
     return (
-      <div>
-        <Navbar />
-        <MapContainer />
-        <MapSidebar />
-        {/* <FilterDrawer /> */}
+      <div className="abcd">
+        <div className="dcba">
+          <Navbar />
+          <MapContainer />
+          <MapSidebar />
+          {/* <FilterDrawer /> */}
+        </div>
       </div>
     );
   }

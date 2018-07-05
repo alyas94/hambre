@@ -2,13 +2,25 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 .border {
-  background: linear-gradient(90deg, #2e2f2c 60%, #fffff0 40%);
+  /* background: linear-gradient(90deg, #2e2f2c 60%, #fffff0 40%); */
   /* background-image: url("./eat.jpg");
   background-repeat: no-repeat;
   background-size: 100vw; */
+}
+
+.abcd {
+  background-color: #c40233ed;
+  min-height: 100vh;
+}
+.dcba {
+  width: 60vw;
+  min-height: 100vh;
+  float: left;
+  background: linear-gradient(30deg, #2e2f2c 85%, #fffff0 15%);
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*logo*/
@@ -117,15 +129,121 @@ body {
 .viewListItem {
   color: black;
   font-family: "Exo", sans-serif;
-  width: 20vw;
+  width: 19vw;
   height: 13vh;
   margin-top: 0.5vh;
   overflow: auto;
   padding-left: 1.2em;
+  padding-right: 0.5em;
   padding-bottom: 0.75em;
   border-top: 1px solid;
   border-bottom: 1px solid;
   border-color: black;
   background-color: #fffff0;
   border-radius: 25px 25px 25px 5px;
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+}
+
+.truckName {
+  text-decoration: underline;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*Location Autocomplete Search*/
+/* .search-bar-container {
+  width: 90%;
+  max-width: 500px;
+  margin: 40px auto 0;
+}
+
+.search-input-container {
+  position: relative;
+} */
+
+.suggestion-icon {
+  margin-right: 8px;
+}
+
+.search-bar-container {
+  width: 90%;
+  max-width: 500px;
+  margin: 40px auto 0;
+}
+
+.search-input-container {
+  position: relative;
+}
+
+.search-input,
+.search-input:focus,
+.search-input:active {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  border: honeydew;
+  display: block;
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  border-radius: 2px;
+  outline: none;
+}
+
+.clear-button,
+.clear-button:active,
+.clear-button:focus {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  color: #999;
+}
+
+.autocomplete-container {
+  border-bottom: honeydew;
+  border-left: honeydew;
+  border-right: honeydew;
+  border-top: 1px solid #e6e6e6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 2px 2px;
+}
+
+.suggestion-item {
+  padding: 8px;
+  text-align: left;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.suggestion-item--active {
+  background-color: #eeeeee;
+}
+
+.dropdown-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px;
+}
+
+.dropdown-footer-image {
+  display: inline-block;
+  width: 150px;
+}
+
+.spinner {
+  color: #18bc9c;
+  font-size: 30px;
+}
+
+.error-message {
+  color: red;
+}
+
+.geocode-result-header {
+  font-size: 20px;
+  color: #222222;
 }
