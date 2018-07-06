@@ -1,4 +1,6 @@
 const db = require("../models");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   findAll: function(req, res) {
@@ -13,10 +15,12 @@ module.exports = {
       })
     )
       .then(user => {
+        //console.log(user);
         const tacoJwt = jwt.sign(
           { email: req.body.email },
           process.env.CRYPTO_KEY
         );
+        console.log(tacoJwt);
         res.status(200).send({ tacoJwt, findUser }); //probably going to need to add a route for finding a specific user
       })
       .catch(err => res.status(422).json(err));
