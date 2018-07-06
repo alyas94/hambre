@@ -17,7 +17,7 @@ import Card from "./components/Card/Card.jsx";
 import CardBody from "./components/Card/CardBody.jsx";
 import CardHeader from "./components/Card/CardHeader.jsx";
 import CardFooter from "./components/Card/CardFooter.jsx";
-import CustomInput from "./components/CustomInput/CustomInput.jsx";
+import CustomInput from "./components/CustomInput/CustomInput";
 
 import loginPageStyle from "./loginPage.jsx";
 

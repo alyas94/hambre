@@ -5,7 +5,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
 const styles = {
   backgroundColor: { backgroundColor: "#fffff0" },
   button: {
@@ -43,8 +42,8 @@ function Navbar(props) {
           <Button style={styles.button} color="inherit">
             Login
           </Button>
-          <Button style={styles.button} id="signup" color="inherit">
-            Sign UP{" "}
+          <Button style={styles.button} id="signup" color="inherit" href="/signup">
+            Sign UP{}
           </Button>
         </Toolbar>
       </AppBar>
