@@ -44,8 +44,8 @@ function Navbar(props) {
           <Button style={styles.button} color="inherit">
             Login
           </Button>
-          <Button style={styles.button} id="signup" color="inherit">
-            Sign UP{" "}
+          <Button style={styles.button} id="signup" color="inherit" href="/signup">
+            Sign UP{}
           </Button>
         </Toolbar>
       </AppBar>

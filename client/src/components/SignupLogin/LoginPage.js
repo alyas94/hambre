@@ -20,21 +20,20 @@ import CustomInput from "./components/CustomInput/CustomInput.jsx";
 
 import loginPageStyle from "./loginPage.jsx";
 
-
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
-      cardAnimaton: "cardHidden"
+      cardAnimaton: "cardHidden",
     };
   }
-    
-handleChange = name => event => {
+
+  handleChange = name => event => {
     this.setState({
-        [name]: event.target.checked
+      [name]: event.target.checked,
     });
-};
+  };
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
     setTimeout(
@@ -44,6 +43,14 @@ handleChange = name => event => {
       700
     );
   }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+
+    userAPI.getMe().then(response => console.log(response));
+    console.log(demoUser);
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -53,7 +60,7 @@ handleChange = name => event => {
           style={{
             // backgroundImage: "url(" + image + ")",
             backgroundSize: "cover",
-            backgroundPosition: "top center"
+            backgroundPosition: "top center",
           }}
         >
           <div className={classes.container}>
@@ -63,16 +70,16 @@ handleChange = name => event => {
                   <form className={classes.form}>
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h2>Login Page</h2>
-                                    </CardHeader>
-                                
+                    </CardHeader>
+
                     {/*   */}
-             <CardBody>
+                    <CardBody>
                       <CustomInput
                         labelText="Email..."
                         id="email"
                         formControlProps={{
-                            fullWidth: true,
-                            flex: "1"
+                          fullWidth: true,
+                          flex: "1",
                         }}
                         inputProps={{
                           type: "email",
@@ -80,14 +87,14 @@ handleChange = name => event => {
                             <InputAdornment position="end">
                               <Email className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
                         labelText="Password"
                         id="pass"
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "password",
@@ -97,9 +104,9 @@ handleChange = name => event => {
                                 className={classes.inputIconsColor}
                               />
                             </InputAdornment>
-                          )
+                          ),
                         }}
-                                        />
+                      />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
                       <Button simple color="primary" size="lg">
