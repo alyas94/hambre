@@ -1,0 +1,9 @@
+.tracker {
+  z-index: 1;
+}
+
+.paper {
+  padding: 1em;
+  font-size: 20px;
+  text-align: center;
+}
