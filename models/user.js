@@ -48,12 +48,13 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 userSchema.findByToken = token => {
   let decode;
   try {
-    decode = jwt.verify(token, process.env.CRYPTO_KEY);
-    return userSchema.find({ email: decode.email });
+    decode = jwt.verify(token, "secret");
+    return userSchema.findOne({ _id: decode._id });
   } catch (e) {
     return Promise.reject();
   }
 };
+
 const Users = mongoose.model("UserInfo", userSchema);
 //   export Schema
 

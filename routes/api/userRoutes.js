@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const userController = require("../../controller/userController");
-const authenticate = require("../../middleware/authenticate").authenticate;
+//const authenticate = require("../../middleware/authenticate").authenticate; we don't need this rignt now, but I'll leave it for later use
 
 router //this is for all the entries in the "user" database
   .route("/")
@@ -15,6 +15,6 @@ router
 
 router.route("/signup").post(userController.create); //this is to create a new user
 
-router.route("/me").get(authenticate, userController.getUser);
+//router.route("/me").get(authenticate, userController.getUser); we dont need this rignt now but I'll leave it for later use
 
 module.exports = router;

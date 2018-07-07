@@ -1,7 +1,8 @@
-const User = require("../models").User;
+const user = require("../models").user;
 
 const authenticate = (req, res, next) => {
   const token = req.header("tacoJwt");
+  console.log("token");
   User.findByToken(token)
     .then(user => {
       if (!user) {

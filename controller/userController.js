@@ -8,6 +8,7 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
   create: function(req, res) {
     db.Users.create(
       Object.assign(req.body, {
@@ -15,13 +16,9 @@ module.exports = {
       })
     )
       .then(user => {
-        //console.log(user);
-        const tacoJwt = jwt.sign(
-          { email: req.body.email },
-          process.env.CRYPTO_KEY
-        );
-        console.log(tacoJwt);
-        res.status(200).send({ tacoJwt, findUser }); //probably going to need to add a route for finding a specific user
+        const tacoJwt = jwt.sign({ _id: req.body._id }, "secret");
+
+        res.status(200).send({ userEmail: user.email, tacoJwt }); //probably going to need to add a route for finding a specific user
       })
       .catch(err => res.status(422).json(err));
   },
