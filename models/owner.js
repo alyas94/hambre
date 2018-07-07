@@ -18,6 +18,7 @@ const ownerSchema = new Schema({
   foodType: { type: String, required: true },
   description: { type: String, required: true },
   location: { type: Array, default: [] },
+  address: { type: String, required: false },
 
   truckActive: { type: Boolean, default: false },
 });

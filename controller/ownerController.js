@@ -56,13 +56,19 @@ module.exports = {
   },
   trucksActive: function(req, res) {
     console.log(req.body);
-    db.Owners.updateOne({ _id: req.params.id })
+    db.Owners.updateOne({ _id: req.params.id }, { truckActive: true })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  trucksInactive: function(req, res) {
+    console.log(req.body);
+    db.Owners.updateOne({ _id: req.params.id }, { truckActive: false })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findActive: function(req, res) {
     console.log(req.body);
-    db.Owners.find({ truckActive: true })
+    db.Owners.find({ truckActive: true }, { location: { $slice: 1 } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
