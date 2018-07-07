@@ -6,23 +6,61 @@ body {
 }
 
 .border {
-  /* background: linear-gradient(90deg, #2e2f2c 60%, #fffff0 40%); */
-  /* background-image: url("./eat.jpg");
-  background-repeat: no-repeat;
-  background-size: 100vw; */
+  border-style: none !important;
+  /* opacity: 50; */
+}
+.bg3 {
+  min-width: 100vw;
+  min-height: 120vh;
+  float: left;
+  background: linear-gradient(30deg, #2e2f2c 70%, #fffff0 30%);
 }
 
-.abcd {
-  background-color: #c40233ed;
-  min-height: 100vh;
+.bg1::after {
+  background-image: url("./img/FoodtruckEvent2.jpg");
+  background-repeat: no-repeat;
 }
-.dcba {
-  width: 60vw;
-  min-height: 100vh;
-  float: left;
-  background: linear-gradient(30deg, #2e2f2c 85%, #fffff0 15%);
+
+.bg2::after {
+  background-image: url("./img/meatBowl.jpg");
+  background-repeat: no-repeat;
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*Parallax*/
+.parallax-wrapper {
+  height: 100vh;
+  /* The scaling of the images would add a horizontal scrollbar, so disable x overflow. */
+  overflow-x: hidden;
+  /* Enable scrolling on the page. */
+  overflow-y: auto;
+  /* Set the perspective to 2px. This is essentailly the simulated distance from the viewport to transformed objects.*/
+  perspective: 2px;
+}
+.section {
+  position: relative;
+  /* The height of the container. Must be set, but it doesn't really matter what the value is. */
+  height: 100vh;
+}
+
+.parallax::after {
+  /* Display and position the pseudo-element */
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* Move the pseudo-element back away from the camera,
+   * then scale it back up to fill the viewport.
+   * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
+  transform: translateZ(-1px) scale(1.5);
+  /* Force the background image to fill the whole element. */
+  background-size: 100%;
+  /* Keep the image from overlapping sibling elements. */
+  z-index: -1;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*logo*/
 #logo {
   text-decoration: none;
@@ -104,6 +142,40 @@ body {
   /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*Landing Logo*/
+/* Pop */
+@-webkit-keyframes hvr-pop {
+  50% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+}
+@keyframes hvr-pop {
+  50% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+}
+/* .hvr-pop {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+} */
+.landing-logo:hover,
+.landing-logo:focus,
+.landing-logo:active {
+  -webkit-animation-name: hvr-pop;
+  animation-name: hvr-pop;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*Nav Buttons*/
 .navBtn {
   padding-top: 10px;
@@ -123,6 +195,8 @@ body {
 .sidebarList {
   width: 26vw;
   overflow: auto;
+  position: absolute;
+  top: 20vh;
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*viewListItem*/
@@ -144,6 +218,7 @@ body {
   -moz-box-shadow: inset 0 0 10px #000000;
   -webkit-box-shadow: inset 0 0 10px #000000;
   box-shadow: inset 0 0 10px #000000;
+  z-index: 100;
 }
 
 .truckName {
@@ -161,6 +236,10 @@ body {
 .search-input-container {
   position: relative;
 } */
+
+.search-icon-wrapper {
+  background-color: #fffff0;
+}
 
 .suggestion-icon {
   margin-right: 8px;

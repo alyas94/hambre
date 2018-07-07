@@ -17,13 +17,13 @@ class MapSidebarItem extends Component {
         className="viewListItem"
         id={this.props.id}
       >
-        <h2 className="truckName">
+        <h4 className="truckName mt-2">
           <strong>{this.props.name}</strong>
-        </h2>
+        </h4>
         {this.state.descHidden === true ? (
-          <h4>Type: {this.props.type}</h4>
+          <p>Type: {this.props.type}</p>
         ) : (
-          <h4>Description: {this.props.description}</h4>
+          <p>Description: {this.props.description}</p>
         )}
       </li>
     );

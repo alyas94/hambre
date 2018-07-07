@@ -6,13 +6,15 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 // import Button from "@material-ui/core/Button";
 import { classnames } from "../../helpers";
-import MapCLButton from "./MapCurrentLocationBtn";
+import SearchIcon from "@material-ui/icons/Search";
+// import MapCLButton from "./MapCurrentLocationBtn";
 
 const style = {
   height: "70vh",
   width: "70vw",
   overflow: "auto",
   margin: "15vh 0px 0px 26vw",
+  Zindex: "50",
   // boxShadow: "-3px 5px 3px #dddddd",
 };
 
@@ -184,7 +186,8 @@ export class MapContainer extends Component {
   render() {
     // let listItemsToRender = this.trucksToList(this.state.trucks, this.bounds);
     return (
-      <div>
+      <div className="bg3" id="map-component-div">
+        {/* <span>Search for food trucks anywhere!</span> */}
         <PlacesAutocomplete
           value={this.state.address}
           onChange={this.handleChange}
@@ -195,6 +198,9 @@ export class MapContainer extends Component {
           {({ getInputProps, suggestions, getSuggestionItemProps }) => {
             return (
               <div className="search-bar-container">
+                {/* <div className="search-icon-wrapper"> */}
+                {/* <SearchIcon className="search-icon-wrapper" /> */}
+                {/* </div> */}
                 <div className="search-input-container">
                   <input
                     {...getInputProps({
@@ -202,7 +208,12 @@ export class MapContainer extends Component {
                       className: "search-input",
                     })}
                   />
-                  <button onClick={this.getCurrentLocation}>Get Current Location</button>
+                  <button
+                    className="btn mt-1"
+                    onClick={this.getCurrentLocation}
+                  >
+                    Get Current Location{" "}
+                  </button>
                   {this.state.address.length > 0 && (
                     <button
                       className="clear-button"
@@ -222,7 +233,9 @@ export class MapContainer extends Component {
                       return (
                         /* eslint-disable react/jsx-key */
                         <div
-                          {...getSuggestionItemProps(suggestion, { className })}
+                          {...getSuggestionItemProps(suggestion, {
+                            className,
+                          })}
                         >
                           <strong>
                             {suggestion.formattedSuggestion.mainText}

@@ -7,6 +7,7 @@ const styles = {
     margin: "7vh 3vw 0px 0px",
     height: "70vh",
     width: "26vw",
+    zIndex: "100",
   },
 };
 
