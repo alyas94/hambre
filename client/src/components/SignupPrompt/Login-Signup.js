@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
-import FoodieSignUP from "../SignupLogin/usersignup";
+import Navbar from "../Navbar/Navbar";
+import UserSignUP from "../SignupLogin/usersignup";
 
 const styles = theme => ({
   root: {
@@ -93,11 +94,14 @@ const images = [
   },
 ];
 
-function ButtonBases(props) {
+function SignUpPrompt(props) {
   const { classes } = props;
 
   return (
+    <div>
+         < Navbar / >
     <div className={classes.root}>
+    
       {images.map(image => (
         <ButtonBase
           focusRipple
@@ -128,12 +132,14 @@ function ButtonBases(props) {
           </span>
         </ButtonBase>
       ))}
-    </div>
+      </div>
+      <UserSignUP/>
+        </div>
   );
 }
 
-ButtonBases.propTypes = {
+SignUpPrompt.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonBases);
+export default withStyles(styles)(SignUpPrompt);
