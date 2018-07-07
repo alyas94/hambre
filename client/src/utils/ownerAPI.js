@@ -14,7 +14,7 @@ export default {
   },
 
   filter: function(filterTerms) {
-    return axios.get("/api/owner/filter", filterTerms);
+    return axios.get("/api/owner/filter" + filterTerms);
   },
 
   deleteOwner: function(id) {
@@ -22,18 +22,25 @@ export default {
   },
 
   updateInformation: function(id, newInformation) {
-    return axios.update("/api/owner/" + id, newInformation);
+    return axios.put("/api/owner/" + id, newInformation);
   },
 
   newLocation: function(id, newLocation) {
-    return axios.put("/api/owner" + id, newLocation);
+    return axios.put("/api/owner/" + id, newLocation);
   },
 
-  truckActive: function(id, newLocation) {
-    return axios.post("/api/owner/" + id + "/active", newLocation);
+  truckActive: function(id) {
+    return axios.put("/api/owner/" + id + "/active");
+  },
+  truckInactive: function(id) {
+    return axios.put("/api/owner/" + id + "/inactive");
   },
 
-  currentLocation: function(id, currentLocation) {
-    return axios.get("/api/owner/" + id + "/active", currentLocation);
+  currentLocation: function(id) {
+    return axios.get("/api/owner/" + id + "/location");
+  },
+
+  activeTrucks: function() {
+    return axios.get("/api/owner/active");
   },
 };
