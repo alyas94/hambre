@@ -8,11 +8,16 @@ import OwnerPage from "./pages/OwnerPage";
 const App = () => (
   <Router>
     <div>
+<<<<<<< HEAD
       <Switch>
         <Route exact path="/" component={MapPage} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/OwnersPage" component={OwnerPage} />
       </Switch>
+=======
+      <Route exact path="/" component={MapPage} />
+      <Route exact path="/owners" component={OwnerPage} />
+>>>>>>> owners page added
     </div>
   </Router>
 );
