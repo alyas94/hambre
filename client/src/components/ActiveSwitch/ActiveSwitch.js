@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { GoogleApiWrapper } from "google-maps-react";
 import Switch from "@material-ui/core/Switch";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -7,51 +8,82 @@ import API from "../../utils/ownerAPI";
 
 class ToggleActive extends Component {
   state = {
-    checked: false, //change for the DB
+    checked: true, // will change with the DB
     id: "5b3c4aec487e595bfa80e135", //changes with the storage saved
+    name: "",
+    currentLocation: {},
   };
 
   componentDidMount() {
-    console.log("component mounted!");
-    this.updateSwitch();
+    // update switch function will find out if the users truck is currently true or false
+    this.grabInfo();
+    this.getCurrentLocation();
   }
 
-  updateSwitch = () => {
+  getCurrentLocation = () => {
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log(position);
+      var currentPosition = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      console.log(currentPosition);
+      this.setState({
+        centerLat: position.coords.latitude,
+        centerLng: position.coords.longitude,
+        currentLocation: currentPosition,
+      });
+      console.log(this.state.currentLocation);
+    });
+  };
+
+  grabInfo = () => {
     API.currentLocation(this.state.id)
-      .then(response => console.log(response.data))
+      .then(
+        response =>
+          this.setState({
+            checked: response.data[0].truckActive,
+            name: response.data[0].truckName,
+          }),
+        response => console.log(response.data)
+      )
       .catch(err => console.log(err));
   };
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked });
-    this.updateActive(this.state.id);
+    this.updateActive();
   };
 
-  updateActive = id => {
+  updateActive = () => {
     if (this.state.checked) {
-      API.truckActive(id)
-        .then(respose => console.log("DB set to  true"))
+      API.truckInactive(this.state.id)
+        .then(respose => console.log("DB set to false"))
         .catch(err => console.log(err));
     } else {
-      API.truckInactive(id)
-        .then(respose => console.log("DB set to false"))
+      API.truckActive(this.state.id)
+        .then(respose => console.log("DB set to  true"))
+        .catch(err => console.log(err));
+      API.newLocation(this.state.id, this.state.currentLocation)
+        .then(respose => console.log("location Updated!"))
         .catch(err => console.log(err));
     }
   };
 
   render() {
-    const { classes } = this.props;
     return (
       <div className="tracker">
-        <Paper className="paper">
+        <Paper className="card-head blue">
           <h2>Let foodies find you!</h2>
+        </Paper>
+        <Paper className="paper">
           <h3>
             {this.state.checked
-              ? "You're live! foodies can now see your truck"
+              ? "You're live! Users can now see your truck"
               : "Hit the switch so foodies can find you !"}
           </h3>
           <label htmlFor="normal-switch">
-            get to work!
+            <i className="fas fa-arrow-right" />
             <Switch
               className="switches"
               checked={this.state.checked}

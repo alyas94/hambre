@@ -22,18 +22,18 @@ export default {
   },
 
   updateInformation: function(id, newInformation) {
-    return axios.update("/api/owner/" + id, newInformation);
+    return axios.put("/api/owner/" + id, newInformation);
   },
 
   newLocation: function(id, newLocation) {
-    return axios.put("/api/owner" + id, newLocation);
+    return axios.put("/api/owner/" + id, newLocation);
   },
 
   truckActive: function(id) {
-    return axios.update("/api/owner/" + id + "/active");
+    return axios.put("/api/owner/" + id + "/active");
   },
   truckInactive: function(id) {
-    return axios.update("/api/owner/" + id + "/inactive");
+    return axios.put("/api/owner/" + id + "/inactive");
   },
 
   currentLocation: function(id) {
