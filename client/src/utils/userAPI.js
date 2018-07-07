@@ -6,7 +6,7 @@ export default {
   },
 
   createUser: function(userData) {
-    return axios.post("/api/user", userData);
+    return axios.post("/api/user/signup", userData);
   },
 
   deleteUser: function(id) {
@@ -19,5 +19,9 @@ export default {
 
   addLocation: function(id, userLocation) {
     return axios.put("/api/user" + id, userLocation);
+  },
+
+  getUser: function(userData) {
+    return axios.get("/api/user/me", userData);
   },
 };
