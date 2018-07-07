@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 
 const styles = {
   logo: {
@@ -9,10 +10,21 @@ const styles = {
 };
 
 export class LandingLogo extends Component {
+  // function scrollToBottom(id){
+  //     var div = document.getElementById(id);
+  //     div.scrollTop = div.scrollHeight - div.clientHeight;
+  //  }
+
   scrollToMap = () => {
     console.log("click");
-    const mapTop = document.getElementById("map-component-div");
-    mapTop.scrollTop;
+    // const mapDiv = document.getElementById("map-component-div");
+    // console.log(mapDiv);
+    let mapDiv = ReactDOM.findDOMNode(
+      document.getElementById("map-component-div")
+    );
+    console.log(mapDiv);
+    mapDiv.scrollIntoView({ behavior: "smooth" }, true);
+    // mapDiv.scrollTop;
   };
   render() {
     return (
