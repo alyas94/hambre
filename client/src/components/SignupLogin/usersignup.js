@@ -20,8 +20,15 @@ import CardFooter from "./components/Card/CardFooter.jsx";
 import CustomInput from "./components/CustomInput/CustomInput";
 
 import loginPageStyle from "./loginPage.jsx";
+
+
+import SignUpPrompt from "../SignupPrompt/Login-Signup";
+
 import userAPI from "../../utils/userAPI";
+
+
 const exjwt = require("express-jwt");
+
 
 class usersignup extends React.Component {
   constructor(props) {
@@ -59,13 +66,7 @@ class usersignup extends React.Component {
     const { classes, ...rest } = this.props;
     return (
       <div>
-        {/* <Header
-          absolute
-          color="transparent"
-          brand="Material Kit React"
-          // rightLinks={<HeaderLinks />}
-          {...rest}
-        /> */}
+    < SignUpPrompt/>
         <div
           className={classes.pageHeader}
           style={{
