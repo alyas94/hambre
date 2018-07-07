@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const SALT_WORK_FACTOR = 10;
+const jwt = require("jsonwebtoken");
 
 // User Schema model
 const userSchema = new Schema({
@@ -11,7 +12,7 @@ const userSchema = new Schema({
     match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
     required: true,
   },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   favorites: { type: Array, default: [] },
 });
 
@@ -42,6 +43,16 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
     if (err) return cb(err);
     cb(null, isMatch);
   });
+};
+
+userSchema.findByToken = token => {
+  let decode;
+  try {
+    decode = jwt.verify(token, "secret");
+    return userSchema.findOne({ _id: decode._id });
+  } catch (e) {
+    return Promise.reject();
+  }
 };
 
 const Users = mongoose.model("UserInfo", userSchema);

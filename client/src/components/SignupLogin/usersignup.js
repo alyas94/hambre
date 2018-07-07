@@ -21,7 +21,13 @@ import CustomInput from "./components/CustomInput/CustomInput";
 
 import loginPageStyle from "./loginPage.jsx";
 
+
 import SignUpPrompt from "../SignupPrompt/Login-Signup";
+
+import userAPI from "../../utils/userAPI";
+
+
+const exjwt = require("express-jwt");
 
 
 class usersignup extends React.Component {
@@ -29,9 +35,10 @@ class usersignup extends React.Component {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
-      cardAnimaton: "cardHidden"
+      cardAnimaton: "cardHidden",
     };
   }
+
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
     setTimeout(
@@ -41,6 +48,20 @@ class usersignup extends React.Component {
       700
     );
   }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    const demoUser = {
+      name: "Howard",
+      email: "the@duck.com",
+      password: "1234567890",
+    };
+
+    userAPI
+      .createUser(demoUser)
+      .then(response => localStorage.setItem("tacoJwt", response.data.tacoJwt));
+  };
+
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -51,7 +72,7 @@ class usersignup extends React.Component {
           style={{
             // backgroundImage: "url(" + image + ")",
             backgroundSize: "cover",
-            backgroundPosition: "top center"
+            backgroundPosition: "top center",
           }}
         >
           <div className={classes.container}>
@@ -67,8 +88,11 @@ class usersignup extends React.Component {
                       <CustomInput
                         labelText="First Name..."
                         id="first"
+                        ref="name"
+                        value={this.state.name}
+                        onChange={this.handleName}
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "text",
@@ -76,14 +100,16 @@ class usersignup extends React.Component {
                             <InputAdornment position="end">
                               <People className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
                         labelText="Email..."
                         id="email"
+                        value={this.state.email}
+                        onChange={this.handleEmail}
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "email",
@@ -91,14 +117,16 @@ class usersignup extends React.Component {
                             <InputAdornment position="end">
                               <Email className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
                         labelText="Password"
                         id="pass"
+                        value={this.state.password}
+                        onChange={this.handlePassword}
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "password",
@@ -108,14 +136,16 @@ class usersignup extends React.Component {
                                 className={classes.inputIconsColor}
                               />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
                         labelText="Confirm Password"
-                
+                        id="confirmPass"
+                        value={this.state.confirmPassword}
+                        onChange={this.handleConfirmPassword}
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "password",
@@ -125,12 +155,17 @@ class usersignup extends React.Component {
                                 className={classes.inputIconsColor}
                               />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="lg">
+                      <Button
+                        simple
+                        color="primary"
+                        size="lg"
+                        onClick={this.handleFormSubmit}
+                      >
                         Get started
                       </Button>
                     </CardFooter>
