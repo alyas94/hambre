@@ -1,10 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import Navbar from "../Navbar/Navbar";
-import UserSignUP from "../SignupLogin/usersignup";
+
+// import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
 
 const styles = theme => ({
   root: {
@@ -85,57 +87,63 @@ const images = [
   {
     url: "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?cs=srgb&dl=burrito-chicken-close-up-461198.jpg&fm=jpg",
     title: 'Are you a Foodie?',
-    width: '50%'
+    width: '50%',
+    path: "/signup-user"
   },
   {
     url: "https://images.pexels.com/photos/417003/pexels-photo-417003.jpeg?cs=srgb&dl=automobile-beach-car-417003.jpg&fm=jpg",
     title: 'Are you a Truck Owner?',
     width: '50%',
+    path: "/signup-truck"
   },
 ];
 
-function SignUpPrompt(props) {
-  const { classes } = props;
+class SignUpPrompt extends React.Component {
 
-  return (
-    <div>
-         < Navbar / >
-    <div className={classes.root}>
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div>
+        < Navbar/>
+        <div className={classes.root}>
     
-      {images.map(image => (
-        <ButtonBase
-          focusRipple
-          key={image.title}
-          className={classes.image}
-          focusVisibleClassName={classes.focusVisible}
-          style={{
-            width: image.width,
-          }}
-        >
-          <span
-            className={classes.imageSrc}
-            style={{
-              backgroundImage: `url(${image.url})`,
-            }}
-          />
-          <span className={classes.imageBackdrop} />
-          <span className={classes.imageButton}>
-            <Typography
-              component="span"
-              variant="subheading"
-              color="inherit"
-              className={classes.imageTitle}
+          {images.map(image => (
+              <ButtonBase
+                focusRipple
+                key={image.title}
+                className={classes.image}
+                focusVisibleClassName={classes.focusVisible}
+                style={{
+                  width: image.width,
+                }}
             >
-              {image.title}
-              <span className={classes.imageMarked} />
-            </Typography>
-          </span>
-        </ButtonBase>
-      ))}
-      </div>
-      <UserSignUP/>
+              <span
+                className={classes.imageSrc}
+                style={{
+                  backgroundImage: `url(${image.url})`,
+                }}
+              />
+              <span className={classes.imageBackdrop} />
+              <span className={classes.imageButton}>
+                 <Link to={image.path}>
+                <Typography
+                  component="span"
+                  variant="subheading"
+                  color="inherit"
+                  className={classes.imageTitle}
+                >
+                 {image.title}
+                  <span className={classes.imageMarked} />
+                </Typography>
+                </Link>
+              </span>
+              </ButtonBase>
+          ))}
         </div>
-  );
+      </div>
+    );
+  }
 }
 
 SignUpPrompt.propTypes = {

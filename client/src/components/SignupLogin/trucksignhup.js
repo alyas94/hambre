@@ -21,13 +21,15 @@ import CustomInput from "./components/CustomInput/CustomInput.jsx";
 
 import loginPageStyle from "./loginPage.jsx";
 
+import SignUpPrompt from "../SignupPrompt/Login-Signup";
 
 class TruckSignUP extends React.Component {
   constructor(props) {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
-      cardAnimaton: "cardHidden"
+      cardAnimaton: "cardHidden",
+    
     };
   }
     
@@ -49,6 +51,7 @@ handleChange = name => event => {
     const { classes } = this.props;
     return (
       <div>
+        < SignUpPrompt/>
         <div
           className={classes.pageHeader}
           style={{
