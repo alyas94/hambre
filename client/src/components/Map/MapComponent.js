@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-// import { MapSidebar } from "./MapSidebar";
-// import MapSidebarItem from "./MapSidebarItem";
-// import MapSidebarItem from "MapSidebar/MapSidebarItem";
-
-const boxShadow = "box-shadow";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
+// import Button from "@material-ui/core/Button";
+import { classnames } from "../../helpers";
+import SearchIcon from "@material-ui/icons/Search";
+// import MapCLButton from "./MapCurrentLocationBtn";
 
 const style = {
   height: "70vh",
   width: "70vw",
   overflow: "auto",
   margin: "15vh 0px 0px 26vw",
+  Zindex: "50",
   // boxShadow: "-3px 5px 3px #dddddd",
 };
 
@@ -22,6 +26,7 @@ export class MapContainer extends Component {
     centerLat: "",
     centerLng: "",
     currentLocation: {},
+    address: "",
     trucks: [
       {
         name: "Temple Coffee",
@@ -155,63 +160,150 @@ export class MapContainer extends Component {
     });
   };
 
-  //for testing purposes
-  logThatShit = item => {
-    console.log(item);
+  handleChange = address => {
+    this.setState({ address });
   };
+
+  handleSelect = address => {
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng =>
+        // console.log("Success", latLng);
+        this.setState({
+          centerLat: latLng.lat,
+          centerLng: latLng.lng,
+        })
+      )
+      .catch(error => console.error("Error", error));
+  };
+
+  handleCloseClick = () => {
+    this.setState({
+      address: "",
+    });
+  };
+
   render() {
     // let listItemsToRender = this.trucksToList(this.state.trucks, this.bounds);
     return (
-      <Map
-        className="border"
-        google={this.props.google}
-        style={style}
-        center={{
-          lat: this.state.centerLat,
-          lng: this.state.centerLng,
-        }}
-        zoom={14}
-        onReady={this.mapBoundsChangeListener}
-        onClick={this.onMapClicked}
-      >
-        <Marker
-          onClick={this.onMarkerClick}
-          name="User"
-          type=" "
-          description="Current user location"
-          position={this.state.currentLocation}
-        />
-        {this.state.trucks.map(truck => {
-          return (
-            <Marker
-              onClick={this.onMarkerClick}
-              key={truck.id}
-              id={truck.id}
-              name={truck.name}
-              type={truck.type}
-              description={truck.description}
-              position={truck.position}
-              //added custom icon for food trucks
-              icon={{
-                url: "../../../truck-catering.png",
-                anchor: new this.props.google.maps.Point(32, 32),
-                scaledSize: new this.props.google.maps.Size(40, 40),
-              }}
-            />
-          );
-        })}
-        <InfoWindow
-          onClose={this.onInfoWindowClose}
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
+      <div className="bg3" id="map-component-div">
+        {/* <span>Search for food trucks anywhere!</span> */}
+        <PlacesAutocomplete
+          value={this.state.address}
+          onChange={this.handleChange}
+          onSelect={this.handleSelect}
+          onError={this.handleError}
+          shouldFetchSuggestions={this.state.address.length > 2}
         >
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-            <h2>{this.state.selectedPlace.type}</h2>
-            <p>{this.state.selectedPlace.description}</p>
-          </div>
-        </InfoWindow>
-      </Map>
+          {({ getInputProps, suggestions, getSuggestionItemProps }) => {
+            return (
+              <div className="search-bar-container">
+                {/* <div className="search-icon-wrapper"> */}
+                {/* <SearchIcon className="search-icon-wrapper" /> */}
+                {/* </div> */}
+                <div className="search-input-container">
+                  <input
+                    {...getInputProps({
+                      placeholder: "Choose map center...",
+                      className: "search-input",
+                    })}
+                  />
+                  <button
+                    className="btn mt-1"
+                    onClick={this.getCurrentLocation}
+                  >
+                    Get Current Location{" "}
+                  </button>
+                  {this.state.address.length > 0 && (
+                    <button
+                      className="clear-button"
+                      onClick={this.handleCloseClick}
+                    >
+                      x
+                    </button>
+                  )}
+                </div>
+                {suggestions.length > 0 && (
+                  <div className="autocomplete-container">
+                    {suggestions.map(suggestion => {
+                      const className = classnames("suggestion-item", {
+                        "suggestion-item--active": suggestion.active,
+                      });
+
+                      return (
+                        /* eslint-disable react/jsx-key */
+                        <div
+                          {...getSuggestionItemProps(suggestion, {
+                            className,
+                          })}
+                        >
+                          <strong>
+                            {suggestion.formattedSuggestion.mainText}
+                          </strong>{" "}
+                          <small>
+                            {suggestion.formattedSuggestion.secondaryText}
+                          </small>
+                        </div>
+                      );
+                      /* eslint-enable react/jsx-key */
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          }}
+        </PlacesAutocomplete>
+        <Map
+          className="border"
+          google={this.props.google}
+          style={style}
+          center={{
+            lat: this.state.centerLat,
+            lng: this.state.centerLng,
+          }}
+          zoom={14}
+          onReady={this.mapBoundsChangeListener}
+          onClick={this.onMapClicked}
+        >
+          <Marker
+            onClick={this.onMarkerClick}
+            name="User"
+            type=" "
+            description="Current user location"
+            position={this.state.currentLocation}
+          />
+          {this.state.trucks.map(truck => {
+            return (
+              <Marker
+                onClick={this.onMarkerClick}
+                key={truck.id}
+                id={truck.id}
+                name={truck.name}
+                type={truck.type}
+                description={truck.description}
+                position={truck.position}
+                //added custom icon for food trucks
+                icon={{
+                  url: "../../../truck-catering.png",
+                  anchor: new this.props.google.maps.Point(32, 32),
+                  scaledSize: new this.props.google.maps.Size(40, 40),
+                }}
+              />
+            );
+          })}
+          <InfoWindow
+            onClose={this.onInfoWindowClose}
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+          >
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+              <h2>{this.state.selectedPlace.type}</h2>
+              <p>{this.state.selectedPlace.description}</p>
+            </div>
+          </InfoWindow>
+        </Map>
+      </div>
     );
   }
 }

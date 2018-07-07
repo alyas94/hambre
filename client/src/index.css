@@ -2,15 +2,65 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 .border {
-  background: linear-gradient(90deg, #2e2f2c 60%, #fffff0 40%);
-  /* background-image: url("./eat.jpg");
+  border-style: none !important;
+  /* opacity: 50; */
+}
+.bg3 {
+  min-width: 100vw;
+  min-height: 120vh;
+  float: left;
+  background: linear-gradient(30deg, #2e2f2c 70%, #fffff0 30%);
+}
+
+.bg1::after {
+  background-image: url("./img/FoodtruckEvent2.jpg");
   background-repeat: no-repeat;
-  background-size: 100vw; */
+}
+
+.bg2::after {
+  background-image: url("./img/meatBowl.jpg");
+  background-repeat: no-repeat;
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*Parallax*/
+.parallax-wrapper {
+  height: 100vh;
+  /* The scaling of the images would add a horizontal scrollbar, so disable x overflow. */
+  overflow-x: hidden;
+  /* Enable scrolling on the page. */
+  overflow-y: auto;
+  /* Set the perspective to 2px. This is essentailly the simulated distance from the viewport to transformed objects.*/
+  perspective: 2px;
+}
+.section {
+  position: relative;
+  /* The height of the container. Must be set, but it doesn't really matter what the value is. */
+  height: 100vh;
+}
+
+.parallax::after {
+  /* Display and position the pseudo-element */
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* Move the pseudo-element back away from the camera,
+   * then scale it back up to fill the viewport.
+   * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
+  transform: translateZ(-1px) scale(1.5);
+  /* Force the background image to fill the whole element. */
+  background-size: 100%;
+  /* Keep the image from overlapping sibling elements. */
+  z-index: -1;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*logo*/
 #logo {
   text-decoration: none;
@@ -92,6 +142,40 @@ body {
   /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*Landing Logo*/
+/* Pop */
+@-webkit-keyframes hvr-pop {
+  50% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+}
+@keyframes hvr-pop {
+  50% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+}
+/* .hvr-pop {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+} */
+.landing-logo:hover,
+.landing-logo:focus,
+.landing-logo:active {
+  -webkit-animation-name: hvr-pop;
+  animation-name: hvr-pop;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*Nav Buttons*/
 .navBtn {
   padding-top: 10px;
@@ -111,21 +195,134 @@ body {
 .sidebarList {
   width: 26vw;
   overflow: auto;
+  position: absolute;
+  top: 20vh;
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*viewListItem*/
 .viewListItem {
   color: black;
   font-family: "Exo", sans-serif;
-  width: 20vw;
+  width: 19vw;
   height: 13vh;
   margin-top: 0.5vh;
   overflow: auto;
   padding-left: 1.2em;
+  padding-right: 0.5em;
   padding-bottom: 0.75em;
   border-top: 1px solid;
   border-bottom: 1px solid;
   border-color: black;
   background-color: #fffff0;
   border-radius: 25px 25px 25px 5px;
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+  z-index: 100;
+}
+
+.truckName {
+  text-decoration: underline;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*Location Autocomplete Search*/
+/* .search-bar-container {
+  width: 90%;
+  max-width: 500px;
+  margin: 40px auto 0;
+}
+
+.search-input-container {
+  position: relative;
+} */
+
+.search-icon-wrapper {
+  background-color: #fffff0;
+}
+
+.suggestion-icon {
+  margin-right: 8px;
+}
+
+.search-bar-container {
+  width: 90%;
+  max-width: 500px;
+  margin: 40px auto 0;
+}
+
+.search-input-container {
+  position: relative;
+}
+
+.search-input,
+.search-input:focus,
+.search-input:active {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  border: honeydew;
+  display: block;
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  border-radius: 2px;
+  outline: none;
+}
+
+.clear-button,
+.clear-button:active,
+.clear-button:focus {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  color: #999;
+}
+
+.autocomplete-container {
+  border-bottom: honeydew;
+  border-left: honeydew;
+  border-right: honeydew;
+  border-top: 1px solid #e6e6e6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 2px 2px;
+}
+
+.suggestion-item {
+  padding: 8px;
+  text-align: left;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.suggestion-item--active {
+  background-color: #eeeeee;
+}
+
+.dropdown-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px;
+}
+
+.dropdown-footer-image {
+  display: inline-block;
+  width: 150px;
+}
+
+.spinner {
+  color: #18bc9c;
+  font-size: 30px;
+}
+
+.error-message {
+  color: red;
+}
+
+.geocode-result-header {
+  font-size: 20px;
+  color: #222222;
 }

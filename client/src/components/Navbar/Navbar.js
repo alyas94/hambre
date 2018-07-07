@@ -5,6 +5,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { HambreLogo } from "../Logo/Logo";
+
 const styles = {
   backgroundColor: { backgroundColor: "#fffff0" },
   button: {
@@ -36,7 +38,7 @@ function Navbar(props) {
         <Toolbar>
           <Typography variant="title" color="inherit" className={classes.flex}>
             <a id="logo" href="/">
-              HAMBRE
+              Hambre
             </a>
           </Typography>
           <Button style={styles.button} color="inherit">
