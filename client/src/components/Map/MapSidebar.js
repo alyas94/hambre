@@ -19,8 +19,13 @@ class MapSidebar extends Component {
   };
   componentDidMount = () => {
     this.loadVenues();
-    this.sessionStorageListener(this.state.trucks);
   };
+
+  componentDidUpdate(prevState) {
+    if (this.state.trucks !== prevState.truckks) {
+      this.sessionStorageListener(this.state.trucks);
+    }
+  }
 
   loadVenues = () => {
     API.activeTrucks()
@@ -39,7 +44,7 @@ class MapSidebar extends Component {
             // console.log(res.data[0].description);
             description: res.data[0].description,
             // console.log(res.data[0].location[0]);
-            postion: res.data[0].location[0],
+            position: res.data[0].location[0],
           },
         ];
         this.setState({
@@ -56,19 +61,21 @@ class MapSidebar extends Component {
       console.log(newMapBounds);
       var toDisplay = [];
       for (var i = 0; i < trucks.length; i++) {
-        if (
-          trucks[i].position.lat < newMapBounds.northBound &&
-          trucks[i].position.lat > newMapBounds.southBound &&
-          trucks[i].position.lng < newMapBounds.westBound &&
-          trucks[i].position.lng > newMapBounds.eastBound
-        ) {
-          toDisplay.push(trucks[i]);
+        if (trucks[i].position) {
+          if (
+            trucks[i].position.lat < newMapBounds.northBound &&
+            trucks[i].position.lat > newMapBounds.southBound &&
+            trucks[i].position.lng < newMapBounds.westBound &&
+            trucks[i].position.lng > newMapBounds.eastBound
+          ) {
+            toDisplay.push(trucks[i]);
+          }
         }
       }
       this.setState({
         toDisplay: toDisplay,
       });
-      // console.log("sessionStorage changed!");
+      console.log("sessionStorage changed!");
     };
 
     document.addEventListener("itemInserted", storageHandler, false);
@@ -78,21 +85,21 @@ class MapSidebar extends Component {
     return (
       <ul style={styles.div} className="sidebarList backgroundColor">
         <QueueAnim className="backgroundColor">
-          {this.state.trucks
-            ? this.state.trucks.map((truck, props) => {
-                return (
-                  <MapSidebarItem
-                    key={truck.id}
-                    id={truck.id}
-                    name={truck.name}
-                    type={truck.type}
-                    description={truck.description}
-                  />
-                );
-              })
-            : this.state.trucks.map(truck => {
-                return <p>No items currently</p>;
-              })}
+          {this.state.toDisplay.length ? (
+            this.state.toDisplay.map((truck, props) => {
+              return (
+                <MapSidebarItem
+                  key={truck.id}
+                  id={truck.id}
+                  name={truck.name}
+                  type={truck.type}
+                  description={truck.description}
+                />
+              );
+            })
+          ) : (
+            <p>No items currently</p>
+          )}
         </QueueAnim>
       </ul>
     );
