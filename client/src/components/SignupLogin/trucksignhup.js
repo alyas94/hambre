@@ -22,6 +22,7 @@ import CustomInput from "./components/CustomInput/CustomInput.jsx";
 import loginPageStyle from "./loginPage.jsx";
 
 import SignUpPrompt from "../SignupPrompt/Login-Signup";
+import { FormInput } from "./components/input/FormInput";
 
 class TruckSignUP extends React.Component {
   constructor(props) {
@@ -29,15 +30,24 @@ class TruckSignUP extends React.Component {
     // we use this to make the card to appear after the page has been rendered
     this.state = {
       cardAnimaton: "cardHidden",
-    
+      truckName: "",
     };
   }
-    
-handleChange = name => event => {
+
+  handleInputChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+    console.log(this.state.truckName);
     this.setState({
-        [name]: event.target.checked
+      [name]: value,
     });
-};
+  };
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.checked,
+    });
+  };
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
     setTimeout(
@@ -51,13 +61,13 @@ handleChange = name => event => {
     const { classes } = this.props;
     return (
       <div>
-        < SignUpPrompt/>
+        <SignUpPrompt />
         <div
           className={classes.pageHeader}
           style={{
             // backgroundImage: "url(" + image + ")",
             backgroundSize: "cover",
-            backgroundPosition: "top center"
+            backgroundPosition: "top center",
           }}
         >
           <div className={classes.container}>
@@ -67,35 +77,35 @@ handleChange = name => event => {
                   <form className={classes.form}>
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h2>Sign Up</h2>
-                                    </CardHeader>
-                                
+                    </CardHeader>
+
                     {/*   */}
-             <CardBody>
-                      <CustomInput
+                    <CardBody>
+                      {/* <CustomInput
                         labelText="Truck Name"
+                        name="truckName"
+                        value={this.state.truckName}
                         id="truck"
+                        onChange={this.handleInputChange}
                         formControlProps={{
-                            fullWidth: true,
-                            flex: "1"
+                          fullWidth: true,
+                          flex: "1",
                         }}
                         inputProps={{
                           type: "text",
                           endAdornment: (
                             <InputAdornment position="end">
-                              <TruckLogo className = {
-                                classes.inputIconsColor
-                              }
-                              />
+                              <TruckLogo className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
                         labelText="Email..."
                         id="email"
                         formControlProps={{
-                            fullWidth: true,
-                            flex: "1"
+                          fullWidth: true,
+                          flex: "1",
                         }}
                         inputProps={{
                           type: "email",
@@ -103,14 +113,14 @@ handleChange = name => event => {
                             <InputAdornment position="end">
                               <Email className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
                         labelText="Password"
                         id="pass"
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "password",
@@ -120,9 +130,14 @@ handleChange = name => event => {
                                 className={classes.inputIconsColor}
                               />
                             </InputAdornment>
-                          )
+                          ),
                         }}
-                                        />
+                      /> */}
+                      <input
+                        name="truckName"
+                        value={this.state.truckName}
+                        onChange={this.handleInputChange}
+                      />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
                       <Button simple color="primary" size="lg">

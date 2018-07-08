@@ -9,6 +9,11 @@ body {
   border-style: none !important;
   /* opacity: 50; */
 }
+
+.map-page-wrapper {
+  background: #2e2f2c;
+}
+
 .bg3 {
   min-width: 100vw;
   min-height: 120vh;
@@ -236,9 +241,12 @@ body {
 .search-input-container {
   position: relative;
 } */
-
-.search-icon-wrapper {
+/* .current-location-btn {
+  float: right;
+} */
+.search-icon {
   background-color: #fffff0;
+  height: 20vh;
 }
 
 .suggestion-icon {
@@ -246,13 +254,16 @@ body {
 }
 
 .search-bar-container {
-  width: 90%;
-  max-width: 500px;
-  margin: 40px auto 0;
+  height: auto;
+  min-width: 50vw;
+  margin-left: 20vw;
+  margin-top: 10vh;
+  margin-right: 2vw;
 }
 
 .search-input-container {
   position: relative;
+  min-width: 40vw;
 }
 
 .search-input,

@@ -197,9 +197,9 @@ export class MapContainer extends Component {
         >
           {({ getInputProps, suggestions, getSuggestionItemProps }) => {
             return (
-              <div className="search-bar-container">
+              <div className="search-bar-container row">
                 {/* <div className="search-icon-wrapper"> */}
-                {/* <SearchIcon className="search-icon-wrapper" /> */}
+                <SearchIcon className="search-icon" />
                 {/* </div> */}
                 <div className="search-input-container">
                   <input
@@ -208,12 +208,6 @@ export class MapContainer extends Component {
                       className: "search-input",
                     })}
                   />
-                  <button
-                    className="btn mt-1"
-                    onClick={this.getCurrentLocation}
-                  >
-                    Get Current Location{" "}
-                  </button>
                   {this.state.address.length > 0 && (
                     <button
                       className="clear-button"
@@ -249,6 +243,12 @@ export class MapContainer extends Component {
                     })}
                   </div>
                 )}
+                <button
+                  className="btn btn-dark ml-2 current-location-btn"
+                  onClick={this.getCurrentLocation}
+                >
+                  Get Current Location{" "}
+                </button>
               </div>
             );
           }}
