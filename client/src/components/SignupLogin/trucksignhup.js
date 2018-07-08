@@ -24,6 +24,7 @@ import loginPageStyle from "./loginPage.jsx";
 import ownerAPI from "../../utils/ownerAPI";
 
 import SignUpPrompt from "../SignupPrompt/Login-Signup";
+import { FormInput } from "./components/input/FormInput";
 
 class TruckSignUP extends React.Component {
   constructor(props) {
