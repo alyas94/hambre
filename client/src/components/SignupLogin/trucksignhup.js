@@ -21,6 +21,8 @@ import CustomInput from "./components/CustomInput/CustomInput.jsx";
 
 import loginPageStyle from "./loginPage.jsx";
 
+import ownerAPI from "../../utils/ownerAPI";
+
 import SignUpPrompt from "../SignupPrompt/Login-Signup";
 
 class TruckSignUP extends React.Component {
@@ -29,15 +31,55 @@ class TruckSignUP extends React.Component {
     // we use this to make the card to appear after the page has been rendered
     this.state = {
       cardAnimaton: "cardHidden",
-    
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      foodType: "",
+      description: "",
     };
   }
-    
-handleChange = name => event => {
+
+  // handleChange = name => event => {
+  //     this.setState({
+  //         [name]: event.target.checked
+  //     });
+  // };
+
+  handleChange = event => {
+    const stateName = event.target.name;
     this.setState({
-        [name]: event.target.checked
+      [stateName]: event.target.value,
     });
-};
+  };
+
+  handleSumbit = event => {
+    event.preventDefault();
+    if (!this.state.name) {
+      return alert("Please enter a name.");
+    } else if (!this.state.email) {
+      return alert("Please enter an email address for your username");
+    } else if (!this.state.password) {
+      return alert("Please enter a password.");
+    } else if (!this.state.confirmPassword) {
+      return alert("Please confirm your password.");
+    } else if (!this.state.foodType) {
+      return alert("Please enter the type of food you serve.");
+    } else if (!this.state.description) {
+      return alert("Please give us a brief description of your food truck.");
+    } else if (this.state.password != this.state.confirmPassword) {
+      return alert("Your passwords do not match");
+    }
+    const ownerData = {
+      truckName: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      foodType: this.state.foodType,
+      description: this.state.description,
+    };
+    ownerAPI.createOwner(ownerData).then(response => console.log(response));
+  };
+
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
     setTimeout(
@@ -51,13 +93,13 @@ handleChange = name => event => {
     const { classes } = this.props;
     return (
       <div>
-        < SignUpPrompt/>
+        <SignUpPrompt />
         <div
           className={classes.pageHeader}
           style={{
             // backgroundImage: "url(" + image + ")",
             backgroundSize: "cover",
-            backgroundPosition: "top center"
+            backgroundPosition: "top center",
           }}
         >
           <div className={classes.container}>
@@ -67,65 +109,66 @@ handleChange = name => event => {
                   <form className={classes.form}>
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h2>Sign Up</h2>
-                                    </CardHeader>
-                                
+                    </CardHeader>
+
                     {/*   */}
-             <CardBody>
-                      <CustomInput
-                        labelText="Truck Name"
-                        id="truck"
-                        formControlProps={{
-                            fullWidth: true,
-                            flex: "1"
-                        }}
-                        inputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <TruckLogo className = {
-                                classes.inputIconsColor
-                              }
-                              />
-                            </InputAdornment>
-                          )
-                        }}
+                    <CardBody>
+                      <input
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        name="name"
+                        type="text"
+                        placeholder="Name"
                       />
-                      <CustomInput
-                        labelText="Email..."
-                        id="email"
-                        formControlProps={{
-                            fullWidth: true,
-                            flex: "1"
-                        }}
-                        inputProps={{
-                          type: "email",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Email className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          )
-                        }}
+                      <br />
+                      <input
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                        name="email"
+                        type="text"
+                        placeholder="Email"
                       />
-                      <CustomInput
-                        labelText="Password"
-                        id="pass"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: "password",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <LockOutline
-                                className={classes.inputIconsColor}
-                              />
-                            </InputAdornment>
-                          )
-                        }}
-                                        />
+                      <br />
+                      <input
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                        name="password"
+                        type="text"
+                        placeholder="Password"
+                      />
+                      <br />
+                      <input
+                        value={this.state.confirmPassword}
+                        onChange={this.handleChange}
+                        name="confirmPassword"
+                        type="text"
+                        placeholder="Confirm Password"
+                      />
+                      <br />
+                      <input
+                        value={this.state.foodType}
+                        onChange={this.handleChange}
+                        name="foodType"
+                        type="text"
+                        placeholder="Food Type"
+                      />
+                      <br />
+                      <input
+                        value={this.state.description}
+                        onChange={this.handleChange}
+                        name="description"
+                        type="text"
+                        placeholder="Give us a Description"
+                      />
+                      <br />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="lg">
+                      <Button
+                        simple
+                        color="primary"
+                        size="lg"
+                        onClick={this.handleSumbit}
+                      >
                         Get started
                       </Button>
                     </CardFooter>
