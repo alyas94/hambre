@@ -77,7 +77,9 @@ class TruckSignUP extends React.Component {
       foodType: this.state.foodType,
       description: this.state.description,
     };
-    ownerAPI.createOwner(ownerData).then(response => console.log(response));
+    ownerAPI
+      .createOwner(ownerData)
+      .then(response => localStorage.setItem("tacoJwt", response.data.tacoJwt));
   };
 
   componentDidMount() {
