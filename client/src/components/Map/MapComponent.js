@@ -4,10 +4,9 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-// import Button from "@material-ui/core/Button";
 import { classnames } from "../../helpers";
 import SearchIcon from "@material-ui/icons/Search";
-// import MapCLButton from "./MapCurrentLocationBtn";
+import API from "../../utils/ownerAPI";
 
 const style = {
   height: "70vh",
@@ -27,51 +26,44 @@ export class MapContainer extends Component {
     centerLng: "",
     currentLocation: {},
     address: "",
-    trucks: [
-      {
-        name: "Temple Coffee",
-        id: 1,
-        type: "Coffee",
-        description: "Great coffee, questionable pastries.",
-        position: {
-          lat: 38.5639,
-          lng: -121.4724,
-        },
-      },
-      {
-        name: "Miyagi Bar & Sushi",
-        id: 2,
-        type: "Japanese",
-        description: "mediocre japanese food!",
-        position: {
-          lat: 38.5734,
-          lng: -121.4022,
-        },
-      },
-    ],
+    trucks: [],
   };
 
   componentDidMount() {
+    // this.loadVenues();
     this.sessionStorageRedefine();
     if (this.state.centerLat === "" && this.state.centerLng === "") {
       this.getCurrentLocation();
     }
   }
 
-  // loadVenues = () => {
-  //   API.allTrucks()
-  //     .then(res =>
-  //       this.setState({
-  //         trucks: res.data,
-  //         name: "",
-  //         id: "",
-  //         type: "",
-  //         description: "",
-  //         postion: {},
-  //       })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
+  loadVenues = () => {
+    API.activeTrucks()
+      .then(res => {
+        console.log(res);
+        // this.setState({
+        //   trucks: res.data,
+        // console.log(res.data[0].truckName);
+        var activeTrucks = [
+          {
+            name: res.data[0].truckName,
+            // console.log(res.data[0]._id);
+            id: res.data[0]._id,
+            // console.log(res.data[0].foodType);
+            type: res.data[0].foodType,
+            // console.log(res.data[0].description);
+            description: res.data[0].description,
+            // console.log(res.data[0].location[0]);
+            postion: res.data[0].location[0],
+          },
+        ];
+        this.setState({
+          trucks: activeTrucks,
+        });
+        // });
+      })
+      .catch(err => console.log(err));
+  };
 
   sessionStorageRedefine = () => {
     var originalSetItem = sessionStorage.setItem;
@@ -89,18 +81,18 @@ export class MapContainer extends Component {
     document.addEventListener("itemInserted", storageHandler, false);
   };
 
-  componentDidUpdate() {
-    // this.centerMoved(mapProps, map);
-    console.log("component updated!!");
-  }
+  // componentDidUpdate() {
+  //   // this.centerMoved(mapProps, map);
+  //   console.log("component updated!!");
+  // }
 
   onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
-      centerLat: props.position.lat,
-      centerLng: props.position.lng,
+      centerLat: props.mapCenter.lat,
+      centerLng: props.mapCenter.lng,
     });
 
   onMapClicked = props => {
@@ -156,6 +148,7 @@ export class MapContainer extends Component {
         centerLng: position.coords.longitude,
         currentLocation: currentPosition,
       });
+      this.loadVenues();
       console.log(this.state.currentLocation);
     });
   };
@@ -272,25 +265,27 @@ export class MapContainer extends Component {
             description="Current user location"
             position={this.state.currentLocation}
           />
-          {this.state.trucks.map(truck => {
-            return (
-              <Marker
-                onClick={this.onMarkerClick}
-                key={truck.id}
-                id={truck.id}
-                name={truck.name}
-                type={truck.type}
-                description={truck.description}
-                position={truck.position}
-                //added custom icon for food trucks
-                icon={{
-                  url: "../../../truck-catering.png",
-                  anchor: new this.props.google.maps.Point(32, 32),
-                  scaledSize: new this.props.google.maps.Size(40, 40),
-                }}
-              />
-            );
-          })}
+          {this.state.trucks.length
+            ? this.state.trucks.map(truck => {
+                return (
+                  <Marker
+                    onClick={this.onMarkerClick}
+                    key={truck.id}
+                    id={truck.id}
+                    name={truck.name}
+                    type={truck.type}
+                    description={truck.description}
+                    position={truck.position}
+                    //added custom icon for food trucks
+                    icon={{
+                      url: "../../../truck-catering.png",
+                      anchor: new this.props.google.maps.Point(32, 32),
+                      scaledSize: new this.props.google.maps.Size(40, 40),
+                    }}
+                  />
+                );
+              })
+            : null}
           <InfoWindow
             onClose={this.onInfoWindowClose}
             marker={this.state.activeMarker}
