@@ -5,12 +5,12 @@ import { withStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
 // import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
 
 const styles = theme => ({
   root: {
-    paddingTop: 20,
     display: 'flex',
     flexWrap: 'wrap',
     minWidth: 300,
@@ -26,7 +26,7 @@ const styles = theme => ({
     '&:hover, &$focusVisible': {
       zIndex: 1,
       '& $imageBackdrop': {
-        opacity: 0.15,
+        opacity: .50,
       },
       '& $imageMarked': {
         opacity: 0,
@@ -70,7 +70,8 @@ const styles = theme => ({
   imageTitle: {
     position: 'relative',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 4}px ${theme.spacing.unit + 6}px`,
-    fontSize: 35
+    fontSize: 35,
+    color: theme.palette.common.white
   },
   imageMarked: {
     height: 3,
@@ -126,11 +127,10 @@ class SignUpPrompt extends React.Component {
               />
               <span className={classes.imageBackdrop} />
               <span className={classes.imageButton}>
-                 <Link to={image.path}>
+                <Link to={image.path} style={{ textDecoration: 'none'}}>
                 <Typography
                   component="span"
                   variant="subheading"
-                  color="inherit"
                   className={classes.imageTitle}
                 >
                  {image.title}
@@ -142,6 +142,7 @@ class SignUpPrompt extends React.Component {
           ))}
         </div>
       </div>
+
     );
   }
 }

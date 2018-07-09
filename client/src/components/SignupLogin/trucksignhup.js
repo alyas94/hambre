@@ -1,15 +1,14 @@
 import React from "react";
+import * as Scroll from 'react-scroll';
+import {
+  Link,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller
+} from 'react-scroll';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-// @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import LockOutline from "@material-ui/icons/LockOutline";
-import TruckLogo from "@material-ui/icons/LocalShipping";
-// core components
-// import Header from "./components/Header/Header.jsx";
-// import HeaderLinks from "./components/Header/HeaderLinks.jsx";
-// import Footer from "./components/Footer/Footer.jsx";
 import GridContainer from "./components/Grid/GridContainer.jsx";
 import GridItem from "./components/Grid/GridItem.jsx";
 import Button from "./components/CustomButtons/Button.jsx";
@@ -17,7 +16,20 @@ import Card from "./components/Card/Card.jsx";
 import CardBody from "./components/Card/CardBody.jsx";
 import CardHeader from "./components/Card/CardHeader.jsx";
 import CardFooter from "./components/Card/CardFooter.jsx";
-import CustomInput from "./components/CustomInput/CustomInput.jsx";
+import {
+  withStyles
+} from "@material-ui/core/styles";
+
+import TextField from "@material-ui/core/TextField";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Input from "@material-ui/core/Input";
+import MenuItem from "@material-ui/core/MenuItem";
+import Divider from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+import Footer from "../Footer/Footer";
+import ArrowUp from '@material-ui/icons/KeyboardArrowUp';
 
 import loginPageStyle from "./loginPage.jsx";
 
@@ -40,12 +52,6 @@ class TruckSignUP extends React.Component {
       description: "",
     };
   }
-
-  // handleChange = name => event => {
-  //     this.setState({
-  //         [name]: event.target.checked
-  //     });
-  // };
 
   handleChange = event => {
     const stateName = event.target.name;
@@ -85,15 +91,51 @@ class TruckSignUP extends React.Component {
 
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
+   
     setTimeout(
-      function() {
+      function () {
+        scroll.scrollTo(580);
         this.setState({ cardAnimaton: "" });
       }.bind(this),
-      700
+      900
+      
     );
+    
   }
   render() {
     const { classes } = this.props;
+    const ListOfFoodType = [
+      "Asian",
+      "BBQ",
+      "Chinese",
+      "Coffee",
+      "Creole",
+      "Cuban",
+      "Dessert",
+      "Filipino",
+      "French",
+      "Fusion",
+      "German",
+      "Greek",
+      "Halal",
+      "Indian",
+      "Italian",
+      "Jamaican",
+      "Japanese",
+      "Korean",
+      "Mexican",
+      "Middle Eastern",
+      "Mongolian",
+      "Pizza",
+      "South American",
+      "Thai",
+      "Vegetarian",
+      "Vietnamese",
+      "Other"
+    ];
+    const listItems = ListOfFoodType.map(list => (
+      <MenuItem value={list}>{list}</MenuItem>
+    ));
     return (
       <div>
         <SignUpPrompt />
@@ -107,7 +149,7 @@ class TruckSignUP extends React.Component {
         >
           <div className={classes.container}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={4}>
+              <GridItem xs={12} sm={12} md={5}>
                 <Card className={classes[this.state.cardAnimaton]}>
                   <form className={classes.form}>
                     <CardHeader color="primary" className={classes.cardHeader}>
@@ -116,54 +158,80 @@ class TruckSignUP extends React.Component {
 
                     {/*   */}
                     <CardBody>
-                      <input
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                        name="name"
-                        type="text"
-                        placeholder="Name"
+                      <TextField
+                        required
+          value={this.state.name}
+          onChange={this.handleChange}
+          name = "name"
+          id="name"
+          label="Truck Name"
+          className={classes.textField}
+          type="text"
+          margin="normal"
+          fullWidth={true}
+          
                       />
-                      <br />
-                      <input
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                        name="email"
-                        type="text"
-                        placeholder="Email"
-                      />
-                      <br />
-                      <input
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                        name="password"
-                        type="text"
-                        placeholder="Password"
-                      />
-                      <br />
-                      <input
-                        value={this.state.confirmPassword}
-                        onChange={this.handleChange}
-                        name="confirmPassword"
-                        type="text"
-                        placeholder="Confirm Password"
-                      />
-                      <br />
-                      <input
-                        value={this.state.foodType}
-                        onChange={this.handleChange}
-                        name="foodType"
-                        type="text"
-                        placeholder="Food Type"
-                      />
-                      <br />
-                      <input
+            <TextField
+                      required
+           value={this.state.email}
+          onChange={this.handleChange}
+          name = "email"
+          id="email"
+          label="Email"
+          className={classes.textField}
+          type="text"
+          margin="normal"
+          fullWidth={true}
+        />
+                      <TextField
+                        required
+          value={this.state.password}
+          onChange={this.handleChange}
+          name = "password"
+          id="password"
+          label="Password"
+          className={classes.textField}
+          type="password"
+          autoComplete="current-password"
+          margin="normal"
+          fullWidth={true}
+        />
+                      <TextField
+                        required
+       value={this.state.confirmPassword}
+        onChange={this.handleChange}
+          name="confirmPassword"
+          label="Confirm Password"
+          className={classes.textField}
+          type="password"
+          margin="normal"
+          fullWidth={true}
+        />
+        <TextField
+                        required
                         value={this.state.description}
                         onChange={this.handleChange}
                         name="description"
-                        type="text"
-                        placeholder="Give us a Description"
-                      />
-                      <br />
+                        id="description"
+                        label="Description"
+                        inputProps={{ maxLength: 200 }}
+                        multiline={true}
+                        fullWidth={true}
+        />
+        <FormControl className={classes.formControl}>
+                        <InputLabel
+                        >Food Type </InputLabel>
+          <Select
+            fullWidth={true}
+            value={this.state.foodType}
+            onChange={this.handleChange}
+                          input={<Input name="foodType" id="foodType"
+                          fullWidth={true}              />}
+          >
+            {listItems}
+          </Select>
+          <FormHelperText>Please Select One</FormHelperText>
+        </FormControl>
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
                       <Button
@@ -177,11 +245,22 @@ class TruckSignUP extends React.Component {
                     </CardFooter>
                   </form>
                 </Card>
-              </GridItem>
+              </GridItem> 
             </GridContainer>
+             <Button
+              onClick={() => {this.scrollToTop}}
+              style={{
+     position: 'absolute',
+    bottom: "5%",
+    right:"20%",
+              }}
+              variant="fab" color="primary" aria-label="Arrow" className={classes.button}>
+        <ArrowUp />
+      </Button>
           </div>
           {/* <Footer whiteFont /> */}
         </div>
+  < Footer/>
       </div>
     );
   }
