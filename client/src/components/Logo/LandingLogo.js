@@ -17,12 +17,10 @@ export class LandingLogo extends Component {
 
   scrollToMap = () => {
     console.log("click");
-    // const mapDiv = document.getElementById("map-component-div");
-    // console.log(mapDiv);
     let mapDiv = ReactDOM.findDOMNode(
       document.getElementById("map-component-div")
     );
-    console.log(mapDiv);
+    // console.log(mapDiv);
     mapDiv.scrollIntoView({ behavior: "smooth" }, true);
     // mapDiv.scrollTop;
   };

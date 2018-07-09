@@ -1,13 +1,14 @@
 import React from "react";
-import * as Scroll from 'react-scroll';
-import {
-  Link,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller
-} from 'react-scroll';
+import ReactDOM from "react-dom";
+// import * as Scroll from "react-scroll";
+// import {
+//   Link,
+//   Element,
+//   Events,
+//   animateScroll as scroll,
+//   scrollSpy,
+//   scroller,
+// } from "react-scroll";
 // @material-ui/core components
 import GridContainer from "./components/Grid/GridContainer.jsx";
 import GridItem from "./components/Grid/GridItem.jsx";
@@ -16,9 +17,7 @@ import Card from "./components/Card/Card.jsx";
 import CardBody from "./components/Card/CardBody.jsx";
 import CardHeader from "./components/Card/CardHeader.jsx";
 import CardFooter from "./components/Card/CardFooter.jsx";
-import {
-  withStyles
-} from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 
 import TextField from "@material-ui/core/TextField";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -29,7 +28,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Divider from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import Footer from "../Footer/Footer";
-import ArrowUp from '@material-ui/icons/KeyboardArrowUp';
+import ArrowUp from "@material-ui/icons/KeyboardArrowUp";
 
 import loginPageStyle from "./loginPage.jsx";
 
@@ -91,17 +90,24 @@ class TruckSignUP extends React.Component {
 
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
-   
+
     setTimeout(
-      function () {
-        scroll.scrollTo(580);
+      function() {
+        // scroll.scrollTo(580);
+        this.scrollToForm();
         this.setState({ cardAnimaton: "" });
       }.bind(this),
       900
-      
     );
-    
   }
+
+  scrollToForm = () => {
+    // console.log("click");
+    let mapDiv = ReactDOM.findDOMNode(document.getElementById("scrollToRef"));
+    // console.log(mapDiv);
+    mapDiv.scrollIntoView({ behavior: "smooth" }, true);
+    // mapDiv.scrollTop;
+  };
   render() {
     const { classes } = this.props;
     const ListOfFoodType = [
@@ -131,7 +137,7 @@ class TruckSignUP extends React.Component {
       "Thai",
       "Vegetarian",
       "Vietnamese",
-      "Other"
+      "Other",
     ];
     const listItems = ListOfFoodType.map(list => (
       <MenuItem value={list}>{list}</MenuItem>
@@ -148,7 +154,7 @@ class TruckSignUP extends React.Component {
           }}
         >
           <div className={classes.container}>
-            <GridContainer justify="center">
+            <GridContainer id="scrollToRef" justify="center">
               <GridItem xs={12} sm={12} md={5}>
                 <Card className={classes[this.state.cardAnimaton]}>
                   <form className={classes.form}>
@@ -160,54 +166,53 @@ class TruckSignUP extends React.Component {
                     <CardBody>
                       <TextField
                         required
-          value={this.state.name}
-          onChange={this.handleChange}
-          name = "name"
-          id="name"
-          label="Truck Name"
-          className={classes.textField}
-          type="text"
-          margin="normal"
-          fullWidth={true}
-          
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        name="name"
+                        id="name"
+                        label="Truck Name"
+                        className={classes.textField}
+                        type="text"
+                        margin="normal"
+                        fullWidth={true}
                       />
-            <TextField
-                      required
-           value={this.state.email}
-          onChange={this.handleChange}
-          name = "email"
-          id="email"
-          label="Email"
-          className={classes.textField}
-          type="text"
-          margin="normal"
-          fullWidth={true}
-        />
                       <TextField
                         required
-          value={this.state.password}
-          onChange={this.handleChange}
-          name = "password"
-          id="password"
-          label="Password"
-          className={classes.textField}
-          type="password"
-          autoComplete="current-password"
-          margin="normal"
-          fullWidth={true}
-        />
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                        name="email"
+                        id="email"
+                        label="Email"
+                        className={classes.textField}
+                        type="text"
+                        margin="normal"
+                        fullWidth={true}
+                      />
                       <TextField
                         required
-       value={this.state.confirmPassword}
-        onChange={this.handleChange}
-          name="confirmPassword"
-          label="Confirm Password"
-          className={classes.textField}
-          type="password"
-          margin="normal"
-          fullWidth={true}
-        />
-        <TextField
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                        name="password"
+                        id="password"
+                        label="Password"
+                        className={classes.textField}
+                        type="password"
+                        autoComplete="current-password"
+                        margin="normal"
+                        fullWidth={true}
+                      />
+                      <TextField
+                        required
+                        value={this.state.confirmPassword}
+                        onChange={this.handleChange}
+                        name="confirmPassword"
+                        label="Confirm Password"
+                        className={classes.textField}
+                        type="password"
+                        margin="normal"
+                        fullWidth={true}
+                      />
+                      <TextField
                         required
                         value={this.state.description}
                         onChange={this.handleChange}
@@ -217,21 +222,25 @@ class TruckSignUP extends React.Component {
                         inputProps={{ maxLength: 200 }}
                         multiline={true}
                         fullWidth={true}
-        />
-        <FormControl className={classes.formControl}>
-                        <InputLabel
-                        >Food Type </InputLabel>
-          <Select
-            fullWidth={true}
-            value={this.state.foodType}
-            onChange={this.handleChange}
-                          input={<Input name="foodType" id="foodType"
-                          fullWidth={true}              />}
-          >
-            {listItems}
-          </Select>
-          <FormHelperText>Please Select One</FormHelperText>
-        </FormControl>
+                      />
+                      <FormControl className={classes.formControl}>
+                        <InputLabel>Food Type </InputLabel>
+                        <Select
+                          fullWidth={true}
+                          value={this.state.foodType}
+                          onChange={this.handleChange}
+                          input={
+                            <Input
+                              name="foodType"
+                              id="foodType"
+                              fullWidth={true}
+                            />
+                          }
+                        >
+                          {listItems}
+                        </Select>
+                        <FormHelperText>Please Select One</FormHelperText>
+                      </FormControl>
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
                       <Button
@@ -245,22 +254,28 @@ class TruckSignUP extends React.Component {
                     </CardFooter>
                   </form>
                 </Card>
-              </GridItem> 
+              </GridItem>
             </GridContainer>
-             <Button
-              onClick={() => {this.scrollToTop}}
+            {/* <Button
+              // onClick={() => {
+              //   this.scrollToTop;
+              // }}
               style={{
-     position: 'absolute',
-    bottom: "5%",
-    right:"20%",
+                position: "absolute",
+                bottom: "5%",
+                right: "20%",
               }}
-              variant="fab" color="primary" aria-label="Arrow" className={classes.button}>
-        <ArrowUp />
-      </Button>
+              variant="fab"
+              color="primary"
+              aria-label="Arrow"
+              className={classes.button}
+            >
+              <ArrowUp />
+            </Button> */}
           </div>
           {/* <Footer whiteFont /> */}
         </div>
-  < Footer/>
+        <Footer />
       </div>
     );
   }
