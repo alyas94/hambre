@@ -201,14 +201,16 @@ export class MapContainer extends Component {
                       className: "search-input",
                     })}
                   />
-                  {this.state.address.length > 0 && (
-                    <button
-                      className="clear-button"
-                      onClick={this.handleCloseClick}
-                    >
-                      x
-                    </button>
-                  )}
+                  {this.state.address.length > 0
+                  // && (
+                  //   <button
+                  //     className="clear-button"
+                  //     onClick={this.handleCloseClick}
+                  //   >
+                  //     x
+                  //   </button>
+                  // )
+                  }
                 </div>
                 {suggestions.length > 0 && (
                   <div className="autocomplete-container">
