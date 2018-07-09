@@ -1,38 +1,20 @@
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  line-height: 1.5em;
-}
-
-.orange {
-  background-color: #ff9800 !important;
-}
-
-.red {
-  background-color: #f44336 !important;
-}
-
-.blue {
-  background-color: #008ac1 !important;
-}
-
 .card-header {
-  z-index: 1 !important;
-  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42),
-    0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   color: whitesmoke;
-  margin: -5px 20px 0;
+  background-color: #ea7119 !important;
+  margin-left: 0.5em;
   border-radius: 3px;
   padding: 15px;
   text-align: center;
   float: left;
+  border-radius: 50% !important;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  line-height: 0%;
+  min-width: 70px;
+  /* animation: App-logo-spin infinite 20s linear; */
 }
 
 .card-body {
-  margin: -2px 20px 0;
   padding: 15px;
   padding-bottom: 0px;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
@@ -41,12 +23,12 @@
   text-align: right;
 }
 i {
-  font-size: 2em;
+  font-size: 2.5em;
 }
 
 .card-icon {
   color: whitesmoke;
-  margin: -5px 20px 0;
+  /* margin: -5px 20px 0; */
   padding: 15px;
   text-align: center;
   border-radius: 50% !important;
@@ -58,6 +40,7 @@ i {
   text-align: right;
   color: #3c4858;
   font-weight: 300;
+  margin-bottom: 0.5em;
 }
 .subheading {
   text-align: right;
@@ -65,9 +48,25 @@ i {
   font-size: 17px;
 }
 
+.subheading,
+.heading {
+  margin-right: 0.5em;
+}
+
 .footer {
   border-top: 1px solid #eee;
   text-align: center;
   color: #999999;
   font-size: 9px;
+  margin-top: 0.5em;
+  padding: 1em;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

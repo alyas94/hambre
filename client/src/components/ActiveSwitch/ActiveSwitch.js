@@ -9,8 +9,7 @@ import API from "../../utils/ownerAPI";
 class ToggleActive extends Component {
   state = {
     checked: true, // will change with the DB
-    id: "5b4256d5a80c1d8da7596250", //changes with the storage saved
-    name: "",
+    id: "5b3c4aec487e595bfa80e135", //changes with the storage saved
     currentLocation: {},
   };
 
@@ -39,13 +38,11 @@ class ToggleActive extends Component {
 
   grabInfo = () => {
     API.currentLocation(this.state.id)
-      .then(
-        response =>
-          this.setState({
-            checked: response.data[0].truckActive,
-            name: response.data[0].truckName,
-          }),
-        response => console.log(response.data)
+      .then(response =>
+        this.setState({
+          checked: response.data[0].truckActive,
+          name: response.data[0].truckName,
+        })
       )
       .catch(err => console.log(err));
   };
@@ -73,30 +70,36 @@ class ToggleActive extends Component {
   render() {
     return (
       <div className="tracker">
-        <Paper className="card-head blue">
-          <h2>Let foodies find you!</h2>
+        <Paper className="switch-head">
+          <h3>Let foodies find you!</h3>
         </Paper>
         <Paper className="paper">
-          <h3>
+          <div className="card-content">
+            <div className="wording">
+              <h4 className="active-heading">
+                {this.state.checked ? "You're live!" : "You're offline!"}
+              </h4>
+              <p className="active-subheading">
+                {this.state.checked
+                  ? "Users can now see your truck"
+                  : "Hit the switch so foodies can find you!"}
+              </p>
+            </div>
+            <label htmlFor="normal-switch" className="switch-section">
+              <i className="fas fa-truck shake" />
+              <Switch
+                className="switches"
+                checked={this.state.checked}
+                onChange={this.handleChange("checked")}
+              />
+            </label>
+          </div>
+          <h6 className="switch-footer">
+            In order to help Users, please turn this switch
             {this.state.checked
-              ? "You're live! Users can now see your truck"
-              : "Hit the switch so foodies can find you !"}
-          </h3>
-          <label htmlFor="normal-switch">
-            <i className="fas fa-arrow-right" />
-            <Switch
-              className="switches"
-              checked={this.state.checked}
-              onChange={this.handleChange("checked")}
-            />
-          </label>
-          <p>
-            <span>
-              {this.state.checked
-                ? "Be sure to turn your truck off when you're done working!"
-                : ""}
-            </span>
-          </p>
+              ? " off when you're done working!"
+              : " on before you start working!"}
+          </h6>
         </Paper>
       </div>
     );
