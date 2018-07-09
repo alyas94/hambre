@@ -56,7 +56,7 @@ ownerSchema.findByToken = token => {
   let decode;
   try {
     decode = jwt.verify(token, "secret");
-    return ownerSchema.findOne({ email: decode.email });
+    return ownerSchema.findOne({ _id: decode._id });
   } catch (e) {
     return Promise.reject();
   }
