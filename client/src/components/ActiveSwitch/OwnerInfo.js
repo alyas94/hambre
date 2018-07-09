@@ -85,9 +85,6 @@ class OwnerInfo extends Component {
             <h6 className="table-state user-desc">{this.state.description}</h6>
           </div>
           <br className="clear-it" />
-          <h6 className="switch-footer">
-            Click the settings gear to change your trucks info!
-          </h6>
         </Paper>
       </div>
     );
