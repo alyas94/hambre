@@ -1,15 +1,14 @@
 import React from "react";
+import * as Scroll from 'react-scroll';
+import {
+  Link,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller
+} from 'react-scroll';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-// @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import LockOutline from "@material-ui/icons/LockOutline";
-import People from "@material-ui/icons/People";
-// core components
-// import Header from "./components/Header/Header.jsx";
-// import HeaderLinks from "./components/Header/HeaderLinks.jsx";
-// import Footer from "./components/Footer/Footer.jsx";
 import GridContainer from "./components/Grid/GridContainer.jsx";
 import GridItem from "./components/Grid/GridItem.jsx";
 import Button from "./components/CustomButtons/Button.jsx";
@@ -17,13 +16,27 @@ import Card from "./components/Card/Card.jsx";
 import CardBody from "./components/Card/CardBody.jsx";
 import CardHeader from "./components/Card/CardHeader.jsx";
 import CardFooter from "./components/Card/CardFooter.jsx";
-import CustomInput from "./components/CustomInput/CustomInput";
+import {
+  withStyles
+} from "@material-ui/core/styles";
+
+import TextField from "@material-ui/core/TextField";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Input from "@material-ui/core/Input";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+import Footer from "../Footer/Footer";
+import ArrowUp from '@material-ui/icons/KeyboardArrowUp';
 
 import loginPageStyle from "./loginPage.jsx";
 
-import SignUpPrompt from "../SignupPrompt/Login-Signup";
 
 import userAPI from "../../utils/userAPI";
+
+import SignUpPrompt from "../SignupPrompt/Login-Signup";
+import { FormInput } from "./components/input/FormInput";
 
 class usersignup extends React.Component {
   constructor(props) {
@@ -31,34 +44,60 @@ class usersignup extends React.Component {
     // we use this to make the card to appear after the page has been rendered
     this.state = {
       cardAnimaton: "cardHidden",
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      foodType: "",
+      description: "",
     };
   }
+
+  handleChange = event => {
+    const stateName = event.target.name;
+    this.setState({
+      [stateName]: event.target.value,
+    });
+  };
+
+  handleSumbit = event => {
+    event.preventDefault();
+    if (!this.state.name) {
+      return alert("Please enter a name.");
+    } else if (!this.state.email) {
+      return alert("Please enter an email address for your username");
+    } else if (!this.state.password) {
+      return alert("Please enter a password.");
+    } else if (!this.state.confirmPassword) {
+      return alert("Please confirm your password.");
+    } else if (this.state.password != this.state.confirmPassword) {
+      return alert("Your passwords do not match");
+    }
+    const userData = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+    };
+    userAPI
+      .createUser(userData)
+      .then(response => localStorage.setItem("userJwt", response.data.userJwt));
+  };
 
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
+   
     setTimeout(
-      function() {
+      function () {
+        scroll.scrollTo(580);
         this.setState({ cardAnimaton: "" });
       }.bind(this),
-      700
+      900
+      
     );
+    
   }
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    const demoUser = {
-      name: "Howard",
-      email: "the@duck.com",
-      password: "1234567890",
-    };
-
-    userAPI
-      .createUser(demoUser)
-      .then(response => localStorage.setItem("tacoJwt", response.data.tacoJwt));
-  };
-
   render() {
-    const { classes, ...rest } = this.props;
+    const { classes } = this.props;
     return (
       <div>
         <SignUpPrompt />
@@ -72,105 +111,93 @@ class usersignup extends React.Component {
         >
           <div className={classes.container}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={4}>
+              <GridItem xs={12} sm={12} md={5}>
                 <Card className={classes[this.state.cardAnimaton]}>
                   <form className={classes.form}>
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h2>Sign Up</h2>
                     </CardHeader>
+
                     {/*   */}
                     <CardBody>
-                      <CustomInput
-                        labelText="First Name..."
-                        id="first"
-                        ref="name"
-                        value={this.state.name}
-                        onChange={this.handleName}
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <People className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
+                      <TextField
+                        required
+          value={this.state.name}
+          onChange={this.handleChange}
+          name = "name"
+          id="name"
+          label="Your Name..."
+          className={classes.textField}
+          type="text"
+          margin="normal"
+          fullWidth={true}
+          
                       />
-                      <CustomInput
-                        labelText="Email..."
-                        id="email"
-                        value={this.state.email}
-                        onChange={this.handleEmail}
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: "email",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Email className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Password"
-                        id="pass"
-                        value={this.state.password}
-                        onChange={this.handlePassword}
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: "password",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <LockOutline
-                                className={classes.inputIconsColor}
-                              />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Confirm Password"
-                        id="confirmPass"
-                        value={this.state.confirmPassword}
-                        onChange={this.handleConfirmPassword}
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: "password",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <LockOutline
-                                className={classes.inputIconsColor}
-                              />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
+            <TextField
+                      required
+           value={this.state.email}
+          onChange={this.handleChange}
+          name = "email"
+          id="email"
+          label="Email"
+          className={classes.textField}
+          type="text"
+          margin="normal"
+          fullWidth={true}
+        />
+                      <TextField
+                        required
+          value={this.state.password}
+          onChange={this.handleChange}
+          name = "password"
+          id="password"
+          label="Password"
+          className={classes.textField}
+          type="password"
+          autoComplete="current-password"
+          margin="normal"
+          fullWidth={true}
+        />
+                      <TextField
+                        required
+       value={this.state.confirmPassword}
+        onChange={this.handleChange}
+          name="confirmPassword"
+          label="Confirm Password"
+          className={classes.textField}
+          type="password"
+          margin="normal"
+          fullWidth={true}
+        />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
                       <Button
                         simple
                         color="primary"
                         size="lg"
-                        onClick={this.handleFormSubmit}
+                        onClick={this.handleSumbit}
                       >
                         Get started
                       </Button>
                     </CardFooter>
                   </form>
                 </Card>
-              </GridItem>
+              </GridItem> 
             </GridContainer>
+            <Button
+              onClick={() => {this.scrollToTop}}
+              style={{
+     position: 'absolute',
+    bottom: "5%",
+    right:"20%",
+              }}
+              variant="fab" color="primary" aria-label="Arrow" className={classes.button}>
+        <ArrowUp />
+      </Button>
           </div>
-          {/* <Footer whiteFont /> */}
+
         </div>
+  < Footer/>
       </div>
     );
   }
