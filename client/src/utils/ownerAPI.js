@@ -13,6 +13,10 @@ export default {
     return axios.post("/api/owner", ownerData);
   },
 
+  login: function(data) {
+    return axios.post("/api/owner/login", data);
+  },
+
   filter: function(filterTerms) {
     return axios.get("/api/owner/filter" + filterTerms);
   },

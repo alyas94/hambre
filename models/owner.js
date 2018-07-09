@@ -52,6 +52,16 @@ ownerSchema.methods.comparePassword = function(candidatePassword, cb) {
   });
 };
 
+ownerSchema.findByToken = token => {
+  let decode;
+  try {
+    decode = jwt.verify(token, "secret");
+    return ownerSchema.findOne({ email: decode.email });
+  } catch (e) {
+    return Promise.reject();
+  }
+};
+
 const Owners = mongoose.model("OwnerInfo", ownerSchema);
 
 //   export Schema

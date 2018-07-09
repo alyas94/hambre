@@ -1,4 +1,6 @@
 const db = require("../models");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 module.exports = {
   findAll: function(req, res) {
@@ -12,11 +14,37 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    console.log(req.body);
-    db.Owners.create(req.body)
-      .then(dbModel => res.json(dbModel))
+    db.Owners.create(
+      req.body
+      // Object.assign(req.body, {
+      //   password: bcrypt.hashSync(req.body.password, 10),
+      // })
+    )
+      .then(owner => {
+        const tacoJwt = jwt.sign({ email: req.body.email }, "secret");
+        res.status(200).send({ ownerEmail: owner.email, tacoJwt });
+      })
       .catch(err => res.status(422).json(err));
   },
+
+  login: function(req, res) {
+    db.Owners.findOne({ email: req.body.email }).then(user => {
+      console.log(req.body.password);
+      console.log(user.password);
+      var passwordResult = bcrypt.compareSync(req.body.password, user.password);
+      console.log(passwordResult);
+      if (passwordResult) {
+        const tacoJwt = jwt.sign({ email: req.body.email }, "secret");
+        res.status(200).send({ tacoJwt, user });
+      } else {
+        res.status(404).send({ message: "Incorrect Password" });
+      }
+    });
+    // .catch(() =>
+    //   res.status(400).send({ message: "Could not find your email" })
+    // );
+  },
+
   deleteOwner: function(req, res) {
     db.Owners.deleteOne({ _id: req.params.id })
       .then(dbModel => res.json(dbModel))
@@ -49,25 +77,21 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByType: function(req, res) {
-    console.log(req.body);
     db.Owners.find({ foodType: req.params.foodtype })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   trucksActive: function(req, res) {
-    console.log(req.body);
     db.Owners.updateOne({ _id: req.params.id }, { truckActive: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   trucksInactive: function(req, res) {
-    console.log(req.body);
     db.Owners.updateOne({ _id: req.params.id }, { truckActive: false })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findActive: function(req, res) {
-    console.log(req.body);
     db.Owners.find({ truckActive: true }, { location: { $slice: 1 } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

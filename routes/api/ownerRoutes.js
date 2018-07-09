@@ -4,13 +4,14 @@ const ownerController = require("../../controller/ownerController"); //this link
 //this is for the entire owners collection
 router
   .route("/")
-  .get(ownerController.findAll) //this is for finding everyone that is an owner
   .get(ownerController.findByLocation) //this is for finding all owners within a given radius. this will need to talk to the userController someohow to find out where they are in relation to the trucks
   .post(ownerController.create); //this is for createing a new owner
 
 router.route("/filter/:foodtype").get(ownerController.findByType); //find all trucks by food type
 
 router.route("/active").get(ownerController.findActive); //this is to find all active trucks
+
+router.route("/login").post(ownerController.login);
 
 router
   .route("/:id")
