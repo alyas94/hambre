@@ -106,7 +106,9 @@ class MapSidebar extends Component {
               );
             })
           ) : (
-            <p>No items currently</p>
+            <li className="viewListItem">
+              <h4 className="mt-4">No trucks here</h4>
+            </li>
           )}
         </QueueAnim>
       </ul>

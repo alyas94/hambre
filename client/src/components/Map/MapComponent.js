@@ -54,7 +54,7 @@ export class MapContainer extends Component {
             // console.log(res.data[0].description);
             description: res.data[0].description,
             // console.log(res.data[0].location[0]);
-            postion: res.data[0].location[0],
+            position: res.data[0].location[0],
           },
         ];
         this.setState({
@@ -86,21 +86,25 @@ export class MapContainer extends Component {
   //   console.log("component updated!!");
   // }
 
-  onMarkerClick = (props, marker, e) =>
+  onMarkerClick = (props, marker, e) => {
+    console.log(props);
+    console.log(marker);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
-      centerLat: props.mapCenter.lat,
-      centerLng: props.mapCenter.lng,
+      centerLat: props.position.lat,
+      centerLng: props.position.lng,
     });
+  };
 
-  onMapClicked = props => {
+  onMapClicked = () => {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
         activeMarker: null,
       });
+      // this.onInfoWindowClose();
     }
   };
 
@@ -124,14 +128,16 @@ export class MapContainer extends Component {
   };
 
   updateBounds = newBounds => {
-    let hambreCMB = {
+    var hambreCMB = {
       northBound: newBounds.f.f,
       southBound: newBounds.f.b,
       westBound: newBounds.b.f,
       eastBound: newBounds.b.b,
     };
-    sessionStorage.setItem("hambreCMB", JSON.stringify(hambreCMB));
-    console.log(JSON.parse(sessionStorage.hambreCMB));
+    if (JSON.stringify(hambreCMB.northBound) !== "null") {
+      sessionStorage.setItem("hambreCMB", JSON.stringify(hambreCMB));
+      console.log(JSON.parse(sessionStorage.hambreCMB));
+    }
   };
 
   //Centers the map on user's current location
@@ -163,6 +169,7 @@ export class MapContainer extends Component {
       .then(latLng =>
         // console.log("Success", latLng);
         this.setState({
+          address: "",
           centerLat: latLng.lat,
           centerLng: latLng.lng,
         })
@@ -180,7 +187,6 @@ export class MapContainer extends Component {
     // let listItemsToRender = this.trucksToList(this.state.trucks, this.bounds);
     return (
       <div className="bg3" id="map-component-div">
-        {/* <span>Search for food trucks anywhere!</span> */}
         <PlacesAutocomplete
           value={this.state.address}
           onChange={this.handleChange}
@@ -201,16 +207,6 @@ export class MapContainer extends Component {
                       className: "search-input",
                     })}
                   />
-                  {this.state.address.length > 0
-                  // && (
-                  //   <button
-                  //     className="clear-button"
-                  //     onClick={this.handleCloseClick}
-                  //   >
-                  //     x
-                  //   </button>
-                  // )
-                  }
                 </div>
                 {suggestions.length > 0 && (
                   <div className="autocomplete-container">
