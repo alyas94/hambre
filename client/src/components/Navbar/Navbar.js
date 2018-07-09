@@ -6,6 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { HambreLogo } from "../Logo/Logo";
+import { Link } from "react-router-dom";
 
 const styles = {
   backgroundColor: { backgroundColor: "#fffff0" },
@@ -41,10 +42,17 @@ function Navbar(props) {
               Hambre
             </a>
           </Typography>
-          <Button style={styles.button} color="inherit">
-            Login
-          </Button>
-          <Button style={styles.button} id="signup" color="inherit" href="/signup">
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            <Button style={styles.button} color="inherit">
+              Login
+            </Button>
+          </Link>
+          <Button
+            style={styles.button}
+            id="signup"
+            color="inherit"
+            href="/signup"
+          >
             Sign UP{}
           </Button>
         </Toolbar>

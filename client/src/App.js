@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import UserSignUP from "./components/SignupLogin/usersignup";
 import TruckSignUP from "./components/SignupLogin/trucksignhup";
+import Login from "./components/SignupLogin/LoginPage";
 
 //import signup from "./components/SignupLogin/signup";//or this one
 import OwnerPage from "./pages/OwnerPage";
@@ -16,11 +17,12 @@ const App = () => (
     <div>
       <Switch>
         <Route exact path="/" component={MapPage} />
-        {/* <Route exact path="/login" component={LoginPage} /> */}
+        {/* <Route exact path="/signup" component={signUp} /> */}
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signup-user" component={UserSignUP} />
         <Route exact path="/signup-truck" component={TruckSignUP} />
         <Route exact path="/OwnersPage" component={OwnerPage} />
+        <Route exact path="/login" component={Login} />
       </Switch>
     </div>
   </Router>
