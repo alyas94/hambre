@@ -49,10 +49,9 @@ class LoginPage extends React.Component {
   handleFormSubmit = event => {
     event.preventDefault();
     const data = {
-      email: "howard@theduck.com",
-      password: "123456",
+      email: this.state.email,
+      password: this.state.password,
     };
-    // console.log(data);
 
     ownerAPI.login(data).then(response => console.log(response));
   };

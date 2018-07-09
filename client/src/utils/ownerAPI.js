@@ -14,7 +14,7 @@ export default {
   },
 
   login: function(data) {
-    return axios.get("/api/owner/login", data);
+    return axios.post("/api/owner/login", data);
   },
 
   filter: function(filterTerms) {

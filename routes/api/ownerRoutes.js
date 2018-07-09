@@ -11,7 +11,7 @@ router.route("/filter/:foodtype").get(ownerController.findByType); //find all tr
 
 router.route("/active").get(ownerController.findActive); //this is to find all active trucks
 
-router.route("/login").get(ownerController.login);
+router.route("/login").post(ownerController.login);
 
 router
   .route("/:id")
