@@ -9,6 +9,7 @@ import LockOutline from "@material-ui/icons/LockOutline";
 // import Header from "./components/Header/Header.jsx";
 // import HeaderLinks from "./components/Header/HeaderLinks.jsx";
 // import Footer from "./components/Footer/Footer.jsx";
+import TextField from "@material-ui/core/TextField";
 import GridContainer from "./components/Grid/GridContainer.jsx";
 import GridItem from "./components/Grid/GridItem.jsx";
 import Button from "./components/CustomButtons/Button.jsx";
@@ -20,12 +21,16 @@ import CustomInput from "./components/CustomInput/CustomInput.jsx";
 
 import loginPageStyle from "./loginPage.jsx";
 
+import ownerAPI from "../../utils/ownerAPI";
+
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
       cardAnimaton: "cardHidden",
+      email: "",
+      password: "",
     };
   }
 
@@ -34,6 +39,27 @@ class LoginPage extends React.Component {
       [name]: event.target.checked,
     });
   };
+
+  handleInputChange = event => {
+    const stateName = event.target.name;
+    this.setState({
+      [stateName]: event.target.value,
+    });
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    const data = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    ownerAPI.login(data).then(response => {
+      console.log(response.data);
+      localStorage.setItem("tacoJwt", response.data.tacoJwt);
+    });
+  };
+
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
     setTimeout(
@@ -43,13 +69,6 @@ class LoginPage extends React.Component {
       700
     );
   }
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-
-    userAPI.getMe().then(response => console.log(response));
-    console.log(demoUser);
-  };
 
   render() {
     const { classes } = this.props;
@@ -74,42 +93,37 @@ class LoginPage extends React.Component {
 
                     {/*   */}
                     <CardBody>
-                      <CustomInput
-                        labelText="Email..."
-                        id="email"
-                        formControlProps={{
-                          fullWidth: true,
-                          flex: "1",
-                        }}
-                        inputProps={{
-                          type: "email",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Email className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
+                      <TextField
+                        value={this.state.email}
+                        onChange={this.handleInputChange}
+                        name="email"
+                        type="text"
+                        placeholder="Email"
+                        className={classes.textField}
+                        margin="normal"
+                        fullWidth={true}
                       />
-                      <CustomInput
-                        labelText="Password"
-                        id="pass"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: "password",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <LockOutline
-                                className={classes.inputIconsColor}
-                              />
-                            </InputAdornment>
-                          ),
-                        }}
+                      <br />
+                      <TextField
+                        value={this.state.password}
+                        onChange={this.handleInputChange}
+                        name="password"
+                        id="password"
+                        label="Password"
+                        className={classes.textField}
+                        type="password"
+                        autoComplete="current-password"
+                        margin="normal"
+                        fullWidth={true}
                       />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="lg">
+                      <Button
+                        simple
+                        color="primary"
+                        size="lg"
+                        onClick={this.handleFormSubmit}
+                      >
                         Submit
                       </Button>
                     </CardFooter>
