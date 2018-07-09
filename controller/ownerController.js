@@ -28,21 +28,23 @@ module.exports = {
   },
 
   login: function(req, res) {
-    db.Owners.findOne({ email: req.body.email }).then(user => {
-      console.log(req.body.password);
-      console.log(user.password);
-      var passwordResult = bcrypt.compareSync(req.body.password, user.password);
-      console.log(passwordResult);
-      if (passwordResult) {
-        const tacoJwt = jwt.sign({ email: req.body.email }, "secret");
-        res.status(200).send({ tacoJwt, user });
-      } else {
-        res.status(404).send({ message: "Incorrect Password" });
-      }
-    });
-    // .catch(() =>
-    //   res.status(400).send({ message: "Could not find your email" })
-    // );
+    db.Owners.findOne({ email: req.body.email })
+      .then(user => {
+        var passwordResult = bcrypt.compareSync(
+          req.body.password,
+          user.password
+        );
+
+        if (passwordResult) {
+          const tacoJwt = jwt.sign({ email: req.body.email }, "secret");
+          res.status(200).send({ tacoJwt, user });
+        } else {
+          res.status(404).send({ message: "Incorrect Password" });
+        }
+      })
+      .catch(() =>
+        res.status(400).send({ message: "Could not find your email" })
+      );
   },
 
   deleteOwner: function(req, res) {

@@ -53,7 +53,10 @@ class LoginPage extends React.Component {
       password: this.state.password,
     };
 
-    ownerAPI.login(data).then(response => console.log(response));
+    ownerAPI.login(data).then(response => {
+      console.log(response.data);
+      localStorage.setItem("tacoJwt", response.data.tacoJwt);
+    });
   };
 
   componentDidMount() {
