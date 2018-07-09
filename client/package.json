@@ -14,7 +14,8 @@
     "react-dom": "^16.4.1",
     "react-places-autocomplete": "^7.2.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^1.1.4",
+    "react-switch": "^3.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
