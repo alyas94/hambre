@@ -22,7 +22,7 @@ class MapSidebar extends Component {
   };
 
   componentDidUpdate(prevState) {
-    if (this.state.trucks !== prevState.truckks) {
+    if (this.state.trucks !== prevState.trucks) {
       this.sessionStorageListener(this.state.trucks);
     }
   }
@@ -72,10 +72,18 @@ class MapSidebar extends Component {
           }
         }
       }
-      this.setState({
-        toDisplay: toDisplay,
-      });
-      console.log("sessionStorage changed!");
+      console.log(JSON.stringify(toDisplay));
+      let control = JSON.stringify(this.state.toDisplay);
+      console.log(control);
+      if (JSON.stringify(toDisplay) === control) {
+        console.log("state is the same");
+      } else {
+        console.log("toDisplay is updated");
+        this.setState({
+          toDisplay: toDisplay,
+        });
+      }
+      // console.log("sessionStorage changed!");
     };
 
     document.addEventListener("itemInserted", storageHandler, false);
