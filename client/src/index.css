@@ -173,37 +173,44 @@ body {
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*Landing Logo*/
-/* Pop */
-@-webkit-keyframes hvr-pop {
-  50% {
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
+@-webkit-keyframes landing-logo {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
   }
 }
-@keyframes hvr-pop {
-  50% {
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
+@keyframes landing-logo {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
   }
 }
-/* .hvr-pop {
+.landing-logo {
   display: inline-block;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-} */
+}
 .landing-logo:hover,
 .landing-logo:focus,
 .landing-logo:active {
-  -webkit-animation-name: hvr-pop;
-  animation-name: hvr-pop;
-  -webkit-animation-duration: 0.3s;
-  animation-duration: 0.3s;
+  -webkit-animation-name: landing-logo;
+  animation-name: landing-logo;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
   -webkit-animation-timing-function: linear;
   animation-timing-function: linear;
-  -webkit-animation-iteration-count: 1;
-  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*Nav Buttons*/
@@ -265,6 +272,7 @@ body {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*Sidebar*/
 .sidebarList {
+  max-height: 100vh;
   width: 26vw;
   overflow: auto;
   position: absolute;

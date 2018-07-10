@@ -6,9 +6,10 @@ import API from "../../utils/ownerAPI";
 const styles = {
   div: {
     margin: "7vh 3vw 0px 0px",
-    height: "70vh",
+    height: "80vh",
     width: "26vw",
     zIndex: "100",
+    overflow: "auto",
   },
 };
 
