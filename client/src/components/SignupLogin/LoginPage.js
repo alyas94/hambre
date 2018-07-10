@@ -54,10 +54,17 @@ class LoginPage extends React.Component {
       password: this.state.password,
     };
 
-    ownerAPI.login(data).then(response => {
-      console.log(response.data);
-      localStorage.setItem("tacoJwt", response.data.tacoJwt);
-    });
+    ownerAPI
+      .login(data)
+      .then(response => {
+        localStorage.setItem("tacoJwt", response.data.tacoJwt);
+        window.location.href = "/OwnersPage";
+      })
+      .catch(e =>
+        alert(
+          "Your email or password is incorrect.\n\rEmail is case sensitive. We're working on that still.\n\rSorry about that.\n\rPasswords are always case senstive."
+        )
+      );
   };
 
   componentDidMount() {
