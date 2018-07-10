@@ -30,6 +30,10 @@ body {
   background-image: url("./img/meatBowl.jpg");
   background-repeat: no-repeat;
 }
+.bg4::after {
+  background-image: url("./img/tastyTacos.jpg");
+  background-repeat: no-repeat;
+}
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*Parallax*/
 .parallax-wrapper {
@@ -59,11 +63,30 @@ body {
   /* Move the pseudo-element back away from the camera,
    * then scale it back up to fill the viewport.
    * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
-  transform: translateZ(-1px) scale(1.5);
+  transform: translateZ(-1px) scale(1.8);
   /* Force the background image to fill the whole element. */
   background-size: 100%;
   /* Keep the image from overlapping sibling elements. */
   z-index: -1;
+}
+
+.parallax2::after {
+  /* Display and position the pseudo-element */
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* Move the pseudo-element back away from the camera,
+   * then scale it back up to fill the viewport.
+   * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
+  transform: translateZ(-2.5px) scale(3);
+  /* Force the background image to fill the whole element. */
+  background-size: 100%;
+  /* Keep the image from overlapping sibling elements. */
+  z-index: -2;
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*logo*/
@@ -186,6 +209,48 @@ body {
   padding-top: 10px;
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*Mission Statement*/
+.mission-statement-wrapper {
+  width: 100vw;
+  height: 70vh;
+  color: black;
+  background: linear-gradient(
+    110deg,
+    #2e2f2c 0%,
+    #2e2f2c 30%,
+    #fffff0 70%,
+    #fffff0 100%
+  );
+  position: absolute;
+  bottom: 30vh;
+}
+
+.bold {
+  font-weight: bold;
+  color: white;
+}
+.underline {
+  text-decoration: underline;
+}
+
+.statement-box {
+  font-family: "Cherry Cream Soda", cursive;
+  /* font-weight: bold; */
+  margin-top: 20vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  padding-right: 5vw;
+  padding-left: 5vw;
+  border-radius: 50px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url("./img/tastyTacos.jpg");
+  background-size: 50vw;
+  -moz-box-shadow: inset 0 0 15px #000000;
+  -webkit-box-shadow: inset 0 0 15px #000000;
+  box-shadow: inset 0 0 15px #000000;
+}
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*map-container*/
 .map-container {
@@ -241,12 +306,19 @@ body {
 .search-input-container {
   position: relative;
 } */
-/* .current-location-btn {
-  float: right;
-} */
+.current-location-btn {
+  position: absolute;
+  right: 26vw;
+  min-height: 6.5vh;
+}
 .search-icon {
   background-color: #fffff0;
-  height: 20vh;
+  min-height: 6.5vh;
+  min-width: 3vw;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .suggestion-icon {
