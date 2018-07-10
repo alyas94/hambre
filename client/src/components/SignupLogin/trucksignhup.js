@@ -276,8 +276,9 @@ class TruckSignUP extends React.Component {
             </Button> */}
           </div>
           {/* <Footer whiteFont /> */}
+                  < Footer / >
         </div>
-        <Footer />
+
       </div>
     );
   }

@@ -18,6 +18,8 @@ import CardBody from "./components/Card/CardBody.jsx";
 import CardHeader from "./components/Card/CardHeader.jsx";
 import CardFooter from "./components/Card/CardFooter.jsx";
 import CustomInput from "./components/CustomInput/CustomInput.jsx";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
 import loginPageStyle from "./loginPage.jsx";
 
@@ -81,6 +83,7 @@ class LoginPage extends React.Component {
     const { classes } = this.props;
     return (
       <div>
+        <Navbar/>
         <div
           className={classes.pageHeader}
           style={{
@@ -137,8 +140,9 @@ class LoginPage extends React.Component {
                 </Card>
               </GridItem>
             </GridContainer>
+             
           </div>
-          {/* <Footer whiteFont /> */}
+       < Footer / >
         </div>
       </div>
     );

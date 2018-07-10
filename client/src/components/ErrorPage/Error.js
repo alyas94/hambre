@@ -105,7 +105,7 @@ class Error extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      < div >
         <Navbar />
         <div className={classes.root}>
           {images.map(image => (
@@ -149,7 +149,7 @@ class Error extends React.Component {
             </ButtonBase>
           ))}
         </div>
-        <Footer />
+        <Footer/>
       </div>
     );
   }

@@ -9,7 +9,7 @@ const footerStyle = {
   borderTop: "1px solid #E7E7E7",
   textAlign: "center",
   padding: "20px",
-  position: "relative",
+  position: "absolute",
   left: "0",
   bottom: "0",
   height: "60px",
