@@ -1,23 +1,34 @@
 import React, { Component } from "react";
-import { GoogleApiWrapper } from "google-maps-react";
 import Switch from "@material-ui/core/Switch";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import "./ActiveSwitch.css";
 import API from "../../utils/ownerAPI";
+const jwt = require("jsonwebtoken");
 
 class ToggleActive extends Component {
   state = {
-    checked: true, // will change with the DB
-    id: "5b43f77e18ffdac77b9b296d", //changes with the storage saved
+    checked: false, // will change with the DB
+    id: "", //changes with the storage saved
     currentLocation: {},
   };
 
   componentDidMount() {
     // update switch function will find out if the users truck is currently true or false
-    this.grabInfo();
     this.getCurrentLocation();
+    this.DecodeUserID();
   }
+  componentDidUpdate() {
+    this.grabInfo();
+  }
+
+  DecodeUserID = () => {
+    const decoder = jwt.decode(localStorage.tacoJwt);
+    const decodedID = decoder.id;
+    this.setState({
+      id: decodedID,
+    });
+  };
 
   getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -26,13 +37,11 @@ class ToggleActive extends Component {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
-      console.log(currentPosition);
       this.setState({
         centerLat: position.coords.latitude,
         centerLng: position.coords.longitude,
         currentLocation: currentPosition,
       });
-      console.log(this.state.currentLocation);
     });
   };
 

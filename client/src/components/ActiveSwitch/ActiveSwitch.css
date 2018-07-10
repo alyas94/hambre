@@ -141,6 +141,13 @@
   margin-right: 1em;
 }
 
+.user-desc {
+  text-align: right;
+  max-width: 10em;
+  max-height: 3em;
+  overflow: scroll;
+}
+
 .clear-it {
   clear: both;
 }

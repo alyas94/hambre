@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -31,38 +31,154 @@ const styles = {
   },
 };
 
-function Navbar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" style={styles.backgroundColor}>
-        <Toolbar>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            <a id="logo" href="/">
-              Hambre
-            </a>
-          </Typography>
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            <Button style={styles.button} color="inherit">
-              Login
-            </Button>
-          </Link>
-          <Button
-            style={styles.button}
-            id="signup"
-            color="inherit"
-            href="/signup"
-          >
-            Sign UP{}
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class Navbar extends Component {
+  state = {
+    loggedIn: false,
+  };
+
+  componentDidMount() {
+    //check the JWT to see if user is logged in or out. Updates the state
+    if (localStorage.tacoJwt) {
+      this.setState({
+        loggedIn: true,
+      });
+    } else {
+      this.setState({
+        loggedIn: true,
+      });
+      this.setState({
+        loggedIn: false,
+      });
+    }
+  }
+
+  handleSignout = () => {
+    // removes the JWT from the local storage and will cause the user to be signed out.
+    localStorage.clear(localStorage.tacoJwt);
+  };
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <AppBar position="static" style={styles.backgroundColor}>
+          <Toolbar>
+            <Typography
+              variant="title"
+              color="inherit"
+              className={classes.flex}
+            >
+              <a id="logo" href="/">
+                Hambre{" "}
+              </a>
+            </Typography>
+            <div>
+              {" "}
+              {this.state.loggedIn ? (
+                <Link to="/OwnersPage" style={{ textDecoration: "none" }}>
+                  <Button style={styles.button} color="inherit">
+                    Dashboard
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/login" style={{ textDecoration: "none" }}>
+                  <Button style={styles.button} color="inherit">
+                    Login
+                  </Button>
+                </Link>
+              )}
+            </div>
+            <div>
+              {" "}
+              {this.state.loggedIn ? (
+                <a href="/" style={{ textDecoration: "none" }}>
+                  <Button
+                    className="signout"
+                    style={styles.button}
+                    color="inherit"
+                    onClick={() => {
+                      this.handleSignout();
+                    }}
+                  >
+                    SIGN OUT
+                  </Button>
+                </a>
+              ) : (
+                <Button
+                  style={styles.button}
+                  id="signup"
+                  color="inherit"
+                  href="/signup"
+                >
+                  Sign UP{}
+                </Button>
+              )}
+            </div>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
-Navbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// function Navbar(props) {
+//   const { classes } = props;
+//   return (
+//     <div className={classes.root}>
+//       <AppBar position="static" style={styles.backgroundColor}>
+//         <Toolbar>
+//           <Typography variant="title" color="inherit" className={classes.flex}>
+//             <a id="logo" href="/">
+//               Hambre
+//             </a>
+//           </Typography>
+// <div>
+//   {" "}
+//   {localStorage ? (
+//     <Link to="/OwnersPage" style={{ textDecoration: "none" }}>
+//       <Button style={styles.button} color="inherit">
+//         Dashboard
+//       </Button>
+//     </Link>
+//   ) : (
+//     <Link to="/login" style={{ textDecoration: "none" }}>
+//       <Button style={styles.button} color="inherit">
+//         Login
+//       </Button>
+//     </Link>
+//   )}
+// </div>
+// <div>
+//   {" "}
+//   {localStorage ? (
+//     <Link to="/" style={{ textDecoration: "none" }}>
+//       <Button
+//         style={styles.button}
+//         color="inherit"
+//         onclick={localStorage.clear()}
+//       >
+//         SIGN OUT
+//       </Button>
+//     </Link>
+//   ) : (
+//     <Button
+//       style={styles.button}
+//       id="signup"
+//       color="inherit"
+//       href="/signup"
+//     >
+//       Sign UP{}
+//     </Button>
+//   )}
+// </div>
+//         </Toolbar>
+//       </AppBar>
+//     </div>
+//   );
+// }
+
+// Navbar.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default withStyles(styles)(Navbar);
