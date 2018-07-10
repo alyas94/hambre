@@ -11,6 +11,7 @@ import Login from "./components/SignupLogin/LoginPage";
 //import signup from "./components/SignupLogin/signup";//or this one
 import OwnerPage from "./pages/OwnerPage";
 // import LoginPage from "./components/SignupLogin/LoginPage";
+import Error from "./components/ErrorPage/Error";
 
 const App = () => (
   <Router>
@@ -23,6 +24,7 @@ const App = () => (
         <Route exact path="/signup-truck" component={TruckSignUP} />
         <Route exact path="/OwnersPage" component={OwnerPage} />
         <Route exact path="/login" component={Login} />
+        <Route component={Error} />
       </Switch>
     </div>
   </Router>
