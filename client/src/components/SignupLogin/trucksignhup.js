@@ -59,7 +59,7 @@ class TruckSignUP extends React.Component {
     });
   };
 
-  handleSumbit = event => {
+  handleSubmit = event => {
     event.preventDefault();
     if (!this.state.name) {
       return alert("Please enter a name.");
@@ -83,9 +83,10 @@ class TruckSignUP extends React.Component {
       foodType: this.state.foodType,
       description: this.state.description,
     };
-    ownerAPI
-      .createOwner(ownerData)
-      .then(response => localStorage.setItem("tacoJwt", response.data.tacoJwt));
+    ownerAPI.createOwner(ownerData).then(response => {
+      localStorage.setItem("tacoJwt", response.data.tacoJwt);
+      window.location.href = "/dashboard/owner";
+    });
   };
 
   componentDidMount() {
@@ -108,6 +109,7 @@ class TruckSignUP extends React.Component {
     mapDiv.scrollIntoView({ behavior: "smooth" }, true);
     // mapDiv.scrollTop;
   };
+
   render() {
     const { classes } = this.props;
     const ListOfFoodType = [
@@ -247,7 +249,7 @@ class TruckSignUP extends React.Component {
                         simple
                         color="primary"
                         size="lg"
-                        onClick={this.handleSumbit}
+                        onClick={this.handleSubmit}
                       >
                         Get started
                       </Button>

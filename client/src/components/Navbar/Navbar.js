@@ -75,7 +75,7 @@ class Navbar extends Component {
             <div>
               {" "}
               {this.state.loggedIn ? (
-                <Link to="/OwnersPage" style={{ textDecoration: "none" }}>
+                <Link to="/dashboard/owner" style={{ textDecoration: "none" }}>
                   <Button style={styles.button} color="inherit">
                     Dashboard
                   </Button>
@@ -120,65 +120,5 @@ class Navbar extends Component {
     );
   }
 }
-
-// function Navbar(props) {
-//   const { classes } = props;
-//   return (
-//     <div className={classes.root}>
-//       <AppBar position="static" style={styles.backgroundColor}>
-//         <Toolbar>
-//           <Typography variant="title" color="inherit" className={classes.flex}>
-//             <a id="logo" href="/">
-//               Hambre
-//             </a>
-//           </Typography>
-// <div>
-//   {" "}
-//   {localStorage ? (
-//     <Link to="/OwnersPage" style={{ textDecoration: "none" }}>
-//       <Button style={styles.button} color="inherit">
-//         Dashboard
-//       </Button>
-//     </Link>
-//   ) : (
-//     <Link to="/login" style={{ textDecoration: "none" }}>
-//       <Button style={styles.button} color="inherit">
-//         Login
-//       </Button>
-//     </Link>
-//   )}
-// </div>
-// <div>
-//   {" "}
-//   {localStorage ? (
-//     <Link to="/" style={{ textDecoration: "none" }}>
-//       <Button
-//         style={styles.button}
-//         color="inherit"
-//         onclick={localStorage.clear()}
-//       >
-//         SIGN OUT
-//       </Button>
-//     </Link>
-//   ) : (
-//     <Button
-//       style={styles.button}
-//       id="signup"
-//       color="inherit"
-//       href="/signup"
-//     >
-//       Sign UP{}
-//     </Button>
-//   )}
-// </div>
-//         </Toolbar>
-//       </AppBar>
-//     </div>
-//   );
-// }
-
-// Navbar.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
 
 export default withStyles(styles)(Navbar);

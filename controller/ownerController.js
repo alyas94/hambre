@@ -36,7 +36,7 @@ module.exports = {
         );
 
         if (passwordResult) {
-          const tacoJwt = jwt.sign({ id: req.body._id }, "secret");
+          const tacoJwt = jwt.sign({ id: user._id }, "secret");
           res.status(200).send({ tacoJwt, user });
         } else {
           res.status(404).send({ message: "Incorrect Password" });
