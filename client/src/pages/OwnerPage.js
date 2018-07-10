@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import MapContainer from "../components/Map/MapComponent";
 import Navbar from "../components/Navbar/Navbar";
 import ActiveSwitch from "../components/ActiveSwitch/ActiveSwitch";
 import OwnerInfo from "../components/ActiveSwitch/OwnerInfo";
