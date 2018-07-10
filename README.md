@@ -24,19 +24,19 @@ To use the app, go to https://hambre-sacramento.herokuapp.com.
 
 Hambre's main function is to show a map with all the food trucks that are currently active. Below, you can see the map without any trucks.
 
-[!Map](client/src/img/hambre_map.jpg)
+![Map](client/src/img/hambre_map.jpg)
 
 If you are a new truck owner, click "Sign Up" in the bar at the top.
 
-[!MainPage](client/src/img/hambre_main.jpg)
+![MainPage](client/src/img/hambre_main.jpg)
 
 If you are a truck owner, click where it says "Are you a Truck Owner?" Enter the information requested. All the fields are required to help users locate your truck.
 
-[!SignUp](client/src/img/hambre_signup.jpg)
+![SignUp](client/src/img/hambre_signup.jpg)
 
 After signing up, you will go to the dashboard. Here you can see informaiton about your truck and let users know if you are "active" or not.
 
-[!Dashboard](client/src/img/hambre_dashboard.jpg)
+![Dashboard](client/src/img/hambre_dashboard.jpg)
 
 ## Built With
 
