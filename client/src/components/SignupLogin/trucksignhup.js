@@ -108,6 +108,7 @@ class TruckSignUP extends React.Component {
     mapDiv.scrollIntoView({ behavior: "smooth" }, true);
     // mapDiv.scrollTop;
   };
+
   render() {
     const { classes } = this.props;
     const ListOfFoodType = [
@@ -176,6 +177,7 @@ class TruckSignUP extends React.Component {
                         margin="normal"
                         fullWidth={true}
                       />
+                      <FormHelperText>Please Select One</FormHelperText>
                       <TextField
                         required
                         value={this.state.email}
