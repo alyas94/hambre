@@ -19,12 +19,20 @@ class MapSidebar extends Component {
   };
   componentDidMount = () => {
     this.loadVenues();
+    this.truckChecker = setInterval(() => {
+      this.loadVenues();
+      console.log("checking trucks");
+    }, 10000);
   };
 
   componentDidUpdate(prevState) {
     if (this.state.trucks !== prevState.trucks) {
       this.sessionStorageListener(this.state.trucks);
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.truckChecker);
   }
 
   loadVenues = () => {
@@ -34,23 +42,31 @@ class MapSidebar extends Component {
         // this.setState({
         //   trucks: res.data,
         // console.log(res.data[0].truckName);
-        var activeTrucks = [
-          {
-            name: res.data[0].truckName,
-            // console.log(res.data[0]._id);
-            id: res.data[0]._id,
-            // console.log(res.data[0].foodType);
-            type: res.data[0].foodType,
-            // console.log(res.data[0].description);
-            description: res.data[0].description,
-            // console.log(res.data[0].location[0]);
-            position: res.data[0].location[0],
-          },
-        ];
-        this.setState({
-          trucks: activeTrucks,
-        });
-        // });
+        var activeTrucks = [];
+        for (var i = 0; i < res.data.length; i++) {
+          activeTrucks.push({
+            name: res.data[i].truckName,
+            // console.log(res.data[i]._id);
+            id: res.data[i]._id,
+            // console.log(res.data[i].foodType);
+            type: res.data[i].foodType,
+            // console.log(res.data[i].description);
+            description: res.data[i].description,
+            // console.log(res.data[i].location[i]);
+            position: res.data[i].location[0],
+          });
+        }
+
+        console.log(JSON.stringify(activeTrucks));
+        console.log(JSON.stringify(this.state.trucks));
+        if (
+          JSON.stringify(activeTrucks) !== JSON.stringify(this.state.trucks)
+        ) {
+          console.log("truck state updating!");
+          this.setState({
+            trucks: activeTrucks,
+          });
+        }
       })
       .catch(err => console.log(err));
   };
