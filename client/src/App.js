@@ -1,16 +1,11 @@
 import React from "react";
-// import MapComponent from "./components/Map/MapComponent";
 import MapPage from "./pages/MapPage";
-import SignUp from "./components/SignupPrompt/Login-Signup"; //which component do we need this one
+import SignUp from "./components/SignupPrompt/Login-Signup";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import UserSignUP from "./components/SignupLogin/usersignup";
 import TruckSignUP from "./components/SignupLogin/trucksignhup";
 import Login from "./components/SignupLogin/LoginPage";
-
-//import signup from "./components/SignupLogin/signup";//or this one
 import OwnerPage from "./pages/OwnerPage";
-// import LoginPage from "./components/SignupLogin/LoginPage";
 import Error from "./components/ErrorPage/Error";
 
 const App = () => (

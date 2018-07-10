@@ -58,7 +58,7 @@ class LoginPage extends React.Component {
       .login(data)
       .then(response => {
         localStorage.setItem("tacoJwt", response.data.tacoJwt);
-        window.location.href = "/OwnersPage";
+        window.location.href = "/dashboard/owner";
       })
       .catch(e =>
         alert(
@@ -84,7 +84,6 @@ class LoginPage extends React.Component {
         <div
           className={classes.pageHeader}
           style={{
-            // backgroundImage: "url(" + image + ")",
             backgroundSize: "cover",
             backgroundPosition: "top center",
           }}
