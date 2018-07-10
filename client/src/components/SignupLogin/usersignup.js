@@ -200,8 +200,9 @@ class usersignup extends React.Component {
         <ArrowUp />
       </Button> */}
           </div>
+                  < Footer/>
         </div>
-        <Footer />
+
       </div>
     );
   }
