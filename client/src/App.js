@@ -22,7 +22,7 @@ const App = () => (
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signup-user" component={UserSignUP} />
         <Route exact path="/signup-truck" component={TruckSignUP} />
-        <Route exact path="/OwnersPage" component={OwnerPage} />
+        <Route exact path="/dashboard/owner" component={OwnerPage} />
         <Route exact path="/login" component={Login} />
         <Route component={Error} />
       </Switch>

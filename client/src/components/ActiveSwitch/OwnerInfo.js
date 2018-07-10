@@ -23,10 +23,8 @@ class OwnerInfo extends Component {
   }
 
   DecodeUserID = () => {
-    console.log(localStorage.tacoJwt);
     const decoder = jwt.decode(localStorage.tacoJwt);
     const decodedID = decoder.id;
-    console.log(decodedID);
     this.setState({
       id: decodedID,
     });
