@@ -213,7 +213,7 @@ export class MapContainer extends Component {
             return (
               <div className="search-bar-container row">
                 {/* <div className="search-icon-wrapper"> */}
-                <SearchIcon className="search-icon" />
+                <SearchIcon className="search-icon mr-1" />
                 {/* </div> */}
                 <div className="search-input-container">
                   <input

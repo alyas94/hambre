@@ -3,7 +3,8 @@ import MapContainer from "../components/Map/MapComponent";
 import MapSidebar from "../components/Map/MapSidebar";
 import Navbar from "../components/Navbar/Navbar";
 import { LandingLogo } from "../components/Logo/LandingLogo";
-// import Footer from "../components/Footer/Footer";
+import { MissionStatement } from "../components/MissionStatement/MissionStatement";
+import Footer from "../components/Footer/Footer";
 // import FilterDrawer from "../components/FilterDrawer/FilterDrawer";
 
 class MapPage extends Component {
@@ -20,8 +21,11 @@ class MapPage extends Component {
             <MapContainer />
           </section>
           <section className="section parallax bg2" />
+          <section className="section">
+            <MissionStatement />
+          </section>
+          {/* <section className="section parallax bg4" /> */}
         </div>
-        {/* <Footer /> */}
       </div>
     );
   }
