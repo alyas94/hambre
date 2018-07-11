@@ -36,10 +36,7 @@ module.exports = {
         );
 
         if (passwordResult) {
-          const tacoJwt = jwt.sign(
-            { id: user._id },
-            process.env.REACT_APP_SECRET
-          );
+          const tacoJwt = jwt.sign({ id: user._id }, process.env.SECRET);
           res.status(200).send({ tacoJwt, user });
         } else {
           res.status(404).send({ message: "Incorrect Password" });
