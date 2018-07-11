@@ -21,7 +21,7 @@ module.exports = {
       // })
     )
       .then(owner => {
-        const tacoJwt = jwt.sign({ id: owner._id }, "secret");
+        const tacoJwt = jwt.sign({ id: owner._id }, process.env.SECRET);
         res.status(200).send({ ownerID: owner.id, tacoJwt });
       })
       .catch(err => res.status(422).json(err));
@@ -36,7 +36,10 @@ module.exports = {
         );
 
         if (passwordResult) {
-          const tacoJwt = jwt.sign({ id: user._id }, "secret");
+          const tacoJwt = jwt.sign(
+            { id: user._id },
+            process.env.REACT_APP_SECRET
+          );
           res.status(200).send({ tacoJwt, user });
         } else {
           res.status(404).send({ message: "Incorrect Password" });

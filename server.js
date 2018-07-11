@@ -5,8 +5,7 @@ const path = require("path");
 const routes = require("./routes");
 const app = express();
 const jwt = require("jsonwebtoken");
-const exjwt = require("express-jwt");
-
+const dotenv = require("dotenv");
 //Cross Origin Access Required
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -14,6 +13,7 @@ app.use((req, res, next) => {
   next();
 });
 
+dotenv.config({ path: ".env" });
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

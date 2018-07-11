@@ -55,7 +55,7 @@ ownerSchema.methods.comparePassword = function(candidatePassword, cb) {
 ownerSchema.findByToken = token => {
   let decode;
   try {
-    decode = jwt.verify(token, "secret");
+    decode = jwt.verify(token, process.env.SECRET);
     return ownerSchema.findOne({ _id: decode._id });
   } catch (e) {
     return Promise.reject();
