@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import "./ActiveSwitch.css";
 import API from "../../utils/ownerAPI";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 const jwt = require("jsonwebtoken");
 
 class OwnerInfo extends Component {
@@ -59,17 +59,11 @@ class OwnerInfo extends Component {
     }
   };
 
-  socketToMe = () => {
-    const socket = io.connect("http://localhost:3000/");
-    socket.emit("message", { message: "hello world" });
-    console.log("data");
-  };
-
   render() {
     return (
       <div className="tracker">
         <Paper className="switch-head">
-          <h3 onClick={this.socketToMe}>Your truck information:</h3>
+          <h3>Your truck information:</h3>
         </Paper>
         <Paper className="paper">
           <div className="table-row">

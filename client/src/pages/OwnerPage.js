@@ -5,6 +5,7 @@ import OwnerInfo from "../components/ActiveSwitch/OwnerInfo";
 import Card from "../components/Card/Card";
 import Footer from "../components/Footer/Footer";
 import Grid from "@material-ui/core/Grid";
+import Message from "../components/Card/Message.js";
 
 const style = {
   backgroundColor: "#eee",
@@ -30,7 +31,9 @@ class OwnerPage extends Component {
             {" "}
             <OwnerInfo />
           </Grid>
-
+          <Grid item xs={12}>
+            <Message />
+          </Grid>
           {/* <Grid item xs={12}>
             <Footer />
           </Grid> */}
