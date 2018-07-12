@@ -22,7 +22,7 @@ class MapSidebar extends Component {
     this.loadVenues();
     this.truckChecker = setInterval(() => {
       this.loadVenues();
-      console.log("checking trucks");
+      // console.log("checking trucks");
     }, 10000);
   };
 
@@ -39,7 +39,7 @@ class MapSidebar extends Component {
   loadVenues = () => {
     API.activeTrucks()
       .then(res => {
-        console.log(res);
+        // console.log(res);
         // this.setState({
         //   trucks: res.data,
         // console.log(res.data[0].truckName);
@@ -58,12 +58,12 @@ class MapSidebar extends Component {
           });
         }
 
-        console.log(JSON.stringify(activeTrucks));
-        console.log(JSON.stringify(this.state.trucks));
+        // console.log(JSON.stringify(activeTrucks));
+        // console.log(JSON.stringify(this.state.trucks));
         if (
           JSON.stringify(activeTrucks) !== JSON.stringify(this.state.trucks)
         ) {
-          console.log("truck state updating!");
+          // console.log("truck state updating!");
           this.setState({
             trucks: activeTrucks,
           });
@@ -75,7 +75,7 @@ class MapSidebar extends Component {
   sessionStorageListener = trucks => {
     var storageHandler = e => {
       let newMapBounds = JSON.parse(sessionStorage.getItem("hambreCMB"));
-      console.log(newMapBounds);
+      // console.log(newMapBounds);
       var toDisplay = [];
       for (var i = 0; i < trucks.length; i++) {
         if (trucks[i].position) {
@@ -89,13 +89,13 @@ class MapSidebar extends Component {
           }
         }
       }
-      console.log(JSON.stringify(toDisplay));
+      // console.log(JSON.stringify(toDisplay));
       let control = JSON.stringify(this.state.toDisplay);
-      console.log(control);
+      // console.log(control);
       if (JSON.stringify(toDisplay) === control) {
-        console.log("state is the same");
+        // console.log("state is the same");
       } else {
-        console.log("toDisplay is updated");
+        // console.log("toDisplay is updated");
         this.setState({
           toDisplay: toDisplay,
         });

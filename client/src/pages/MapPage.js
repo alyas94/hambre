@@ -5,9 +5,23 @@ import Navbar from "../components/Navbar/Navbar";
 import { LandingLogo } from "../components/Logo/LandingLogo";
 import { MissionStatement } from "../components/MissionStatement/MissionStatement";
 import Grid from "@material-ui/core/Grid";
+import io from "socket.io-client";
+
+// const socket = io.connect("/");
 // import FilterDrawer from "../components/FilterDrawer/FilterDrawer";
 
 class MapPage extends Component {
+  componentDidMount() {
+    const socket = io.connect("http://localhost:3000/");
+    socket.on("send to clients", message => this.messageReceive(message));
+  }
+
+  messageReceive(message) {
+    console.log(JSON.stringify(message));
+    // const messages = [...this.state.messages, message];
+    // this.setState({messages})
+  }
+
   render() {
     return (
       <div className="row map-page-wrapper">
