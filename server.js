@@ -6,6 +6,11 @@ const routes = require("./routes");
 const app = express();
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+// const socketio = require("socket.io");
+// app.set("port", process.env.PORT || 3002);
+var server = require("http").Server(app);
+var io = require("socket.io")(server);
+
 //Cross Origin Access Required
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -35,6 +40,21 @@ mongoose.connect(
 
 // Start the API server
 const PORT = process.env.PORT || 3002;
-app.listen(PORT, function() {
+
+// socketio listeners
+io.on("connection", socket => {
+  console.log("socket connected");
+  socket.on("message", data => {
+    console.log(data);
+    socket.broadcast.emit("send to clients", { message: data.message });
+  });
+  socket.on("disconnect", () => console.log("disconnected"));
+});
+
+// io.on("connection", function(socket) {
+//   console.log("a user connected");
+// });
+
+server.listen(PORT, function() {
   console.log(`API Server now listening on PORT ${PORT}...`);
 });

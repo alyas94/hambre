@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import "./ActiveSwitch.css";
 import API from "../../utils/ownerAPI";
+// import io from "socket.io-client";
 const jwt = require("jsonwebtoken");
 
 class OwnerInfo extends Component {

@@ -415,6 +415,19 @@ body {
   color: #222222;
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*Message Modal*/
+.message-modal {
+  padding-left: 10vw;
+  padding-right: 10vw;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  color: #2e2f2c;
+  font-family: "Gochi Hand", cursive;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*Media Query*/
 @media (max-width: 736px) {
   .sidebarList {
     min-width: 100vw;

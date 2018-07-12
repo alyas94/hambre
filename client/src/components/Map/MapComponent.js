@@ -33,7 +33,7 @@ export class MapContainer extends Component {
   componentDidMount() {
     this.truckChecker = setInterval(() => {
       this.loadVenues();
-      console.log("checking trucks");
+      // console.log("checking trucks");
     }, 10000);
     this.sessionStorageRedefine();
     if (this.state.centerLat === "" && this.state.centerLng === "") {
@@ -48,7 +48,7 @@ export class MapContainer extends Component {
   loadVenues = () => {
     API.activeTrucks()
       .then(res => {
-        console.log(res);
+        // console.log(res);
         // this.setState({
         //   trucks: res.data,
         // console.log(res.data[0].truckName);
@@ -67,12 +67,12 @@ export class MapContainer extends Component {
           });
         }
 
-        console.log(JSON.stringify(activeTrucks));
-        console.log(JSON.stringify(this.state.trucks));
+        // console.log(JSON.stringify(activeTrucks));
+        // console.log(JSON.stringify(this.state.trucks));
         if (
           JSON.stringify(activeTrucks) !== JSON.stringify(this.state.trucks)
         ) {
-          console.log("truck state updating!");
+          // console.log("truck state updating!");
           this.setState({
             trucks: activeTrucks,
           });
@@ -91,7 +91,7 @@ export class MapContainer extends Component {
     };
 
     var storageHandler = function(e) {
-      console.log("sessionStorage changed!");
+      // console.log("sessionStorage changed!");
     };
 
     document.addEventListener("itemInserted", storageHandler, false);
@@ -103,8 +103,8 @@ export class MapContainer extends Component {
   // }
 
   onMarkerClick = (props, marker, e) => {
-    console.log(props);
-    console.log(marker);
+    // console.log(props);
+    // console.log(marker);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -133,9 +133,9 @@ export class MapContainer extends Component {
   mapBoundsChangeListener = (mapProps, map) => {
     const { google } = mapProps;
     google.maps.event.addListener(map, "idle", () => {
-      console.log("idling");
+      // console.log("idling");
       var bounds = map.getBounds();
-      console.log(bounds);
+      // console.log(bounds);
       this.updateBounds(bounds);
       //   console.log(this.currentMapBouds);
       //   let someTrucks = this.state.trucks;
@@ -152,26 +152,26 @@ export class MapContainer extends Component {
     };
     if (JSON.stringify(hambreCMB.northBound) !== "null") {
       sessionStorage.setItem("hambreCMB", JSON.stringify(hambreCMB));
-      console.log(JSON.parse(sessionStorage.hambreCMB));
+      // console.log(JSON.parse(sessionStorage.hambreCMB));
     }
   };
 
   //Centers the map on user's current location
   getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(position => {
-      console.log(position);
+      // console.log(position);
       var currentPosition = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
-      console.log(currentPosition);
+      // console.log(currentPosition);
       this.setState({
         centerLat: position.coords.latitude,
         centerLng: position.coords.longitude,
         currentLocation: currentPosition,
       });
       this.loadVenues();
-      console.log(this.state.currentLocation);
+      // console.log(this.state.currentLocation);
     });
   };
 
