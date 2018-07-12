@@ -26,13 +26,11 @@ class OwnerPage extends Component {
           <Grid item xs={12} sm={6} m={6}>
             {" "}
             <ActiveSwitch />
+            <Message />
           </Grid>
           <Grid item xs={12} sm={6} m={6}>
             {" "}
             <OwnerInfo />
-          </Grid>
-          <Grid item xs={12}>
-            <Message />
           </Grid>
           {/* <Grid item xs={12}>
             <Footer />
