@@ -18,7 +18,7 @@ class Message extends Component {
   };
 
   socketToMe = message => {
-    const socket = io.connect("http://localhost:3000/");
+    const socket = io.connect("/");
     socket.emit("message", { message: message });
     console.log("data");
   };
