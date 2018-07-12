@@ -30,12 +30,12 @@ class Message extends Component {
             Do you have a special? Tell the foodies!
           </h6>
           <form onSubmit={this.handleSubmit} id="form1" className="mb-4">
-            <div class="form-group">
+            <div className="form-group">
               <textarea
                 value={this.state.message}
                 onChange={this.handleChange}
                 placeholder="$1 taco tuesdays! Get some now!"
-                class="form-control"
+                className="form-control"
                 id="exampleFormControlTextarea1"
                 rows="3"
               />
