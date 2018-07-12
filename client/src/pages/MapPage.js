@@ -1,30 +1,29 @@
 import React, { Component } from "react";
 import MapContainer from "../components/Map/MapComponent";
 import MapSidebar from "../components/Map/MapSidebar";
+import MessageModal from "../components/Modal/Modal";
 import Navbar from "../components/Navbar/Navbar";
 import { LandingLogo } from "../components/Logo/LandingLogo";
 import { MissionStatement } from "../components/MissionStatement/MissionStatement";
 import Grid from "@material-ui/core/Grid";
-import io from "socket.io-client";
-
-// const socket = io.connect("/");
-// import FilterDrawer from "../components/FilterDrawer/FilterDrawer";
+// import io from "socket.io-client";
 
 class MapPage extends Component {
-  componentDidMount() {
-    const socket = io.connect("http://localhost:3000/");
-    socket.on("send to clients", message => this.messageReceive(message));
-  }
+  // componentDidMount() {
+  //   const socket = io.connect("http://localhost:3000/");
+  //   socket.on("send to clients", message => this.messageReceive(message));
+  // }
 
-  messageReceive(message) {
-    console.log(JSON.stringify(message));
-    // const messages = [...this.state.messages, message];
-    // this.setState({messages})
-  }
+  // messageReceive(message) {
+  //   console.log(JSON.stringify(message));
+  // const messages = [...this.state.messages, message];
+  // this.setState({messages})
+  // }
 
   render() {
     return (
       <div className="row map-page-wrapper">
+        <MessageModal />
         <Grid container spacing={8}>
           <Grid item xs={12}>
             <Navbar />
