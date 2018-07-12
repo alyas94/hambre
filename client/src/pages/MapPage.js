@@ -9,16 +9,16 @@ import Grid from "@material-ui/core/Grid";
 // import io from "socket.io-client";
 
 class MapPage extends Component {
-  componentDidMount() {
-    const socket = io.connect("/");
-    socket.on("send to clients", message => this.messageReceive(message));
-  }
+  // componentDidMount() {
+  //   const socket = io.connect("/");
+  //   socket.on("send to clients", message => this.messageReceive(message));
+  // }
 
-  messageReceive(message) {
-    console.log(JSON.stringify(message));
-    const messages = [...this.state.messages, message];
-    this.setState({ messages });
-  }
+  // messageReceive(message) {
+  //   console.log(JSON.stringify(message));
+  //   const messages = [...this.state.messages, message];
+  //   this.setState({ messages });
+  // }
 
   render() {
     return (
