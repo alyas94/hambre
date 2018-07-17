@@ -48,7 +48,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 userSchema.findByToken = token => {
   let decode;
   try {
-    decode = jwt.verify(token, "secret");
+    decode = jwt.verify(token, process.env.SECRET);
     return userSchema.findOne({ _id: decode._id });
   } catch (e) {
     return Promise.reject();

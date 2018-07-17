@@ -14,12 +14,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Owners.create(
-      req.body
-      // Object.assign(req.body, {
-      //   password: bcrypt.hashSync(req.body.password, 10),
-      // })
-    )
+    db.Owners.create(req.body)
       .then(owner => {
         const tacoJwt = jwt.sign({ id: owner._id }, process.env.SECRET);
         res.status(200).send({ ownerID: owner.id, tacoJwt });

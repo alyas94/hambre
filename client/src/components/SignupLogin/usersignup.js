@@ -46,8 +46,7 @@ class usersignup extends React.Component {
       email: "",
       password: "",
       confirmPassword: "",
-      foodType: "",
-      description: "",
+      samePassword: "",
     };
   }
 
@@ -79,6 +78,7 @@ class usersignup extends React.Component {
     userAPI
       .createUser(userData)
       .then(response => localStorage.setItem("userJwt", response.data.userJwt));
+    window.location.href = "/";
   };
 
   componentDidMount() {
@@ -200,9 +200,8 @@ class usersignup extends React.Component {
         <ArrowUp />
       </Button> */}
           </div>
-                  < Footer/>
+          <Footer />
         </div>
-
       </div>
     );
   }

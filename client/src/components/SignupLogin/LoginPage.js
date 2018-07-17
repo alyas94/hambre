@@ -24,6 +24,7 @@ import Footer from "../Footer/Footer";
 import loginPageStyle from "./loginPage.jsx";
 
 import ownerAPI from "../../utils/ownerAPI";
+import userAPI from "../../utils/userAPI";
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class LoginPage extends React.Component {
       cardAnimaton: "cardHidden",
       email: "",
       password: "",
+      userType: "",
     };
   }
 
@@ -56,11 +58,23 @@ class LoginPage extends React.Component {
       password: this.state.password,
     };
 
-    ownerAPI
+    // ownerAPI
+    //   .login(data)
+    //   .then(response => {
+    //     localStorage.setItem("tacoJwt", response.data.tacoJwt);
+    //     window.location.href = "/dashboard/owner";
+    //   })
+    //   .catch(e =>
+    //     alert(
+    //       "Your email or password is incorrect.\n\rEmail is case sensitive. We're working on that still.\n\rSorry about that.\n\rPasswords are always case senstive."
+    //     )
+    //   );
+
+    userAPI
       .login(data)
       .then(response => {
         localStorage.setItem("tacoJwt", response.data.tacoJwt);
-        window.location.href = "/dashboard/owner";
+        window.location.href = "/";
       })
       .catch(e =>
         alert(
@@ -83,7 +97,7 @@ class LoginPage extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Navbar/>
+        <Navbar />
         <div
           className={classes.pageHeader}
           style={{
@@ -140,9 +154,8 @@ class LoginPage extends React.Component {
                 </Card>
               </GridItem>
             </GridContainer>
-             
           </div>
-       < Footer / >
+          <Footer />
         </div>
       </div>
     );

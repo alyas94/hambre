@@ -17,4 +17,6 @@ router.route("/signup").post(userController.create); //this is to create a new u
 
 //router.route("/me").get(authenticate, userController.getUser); we dont need this rignt now but I'll leave it for later use
 
+router.route("/login").post(userController.login);
+
 module.exports = router;
