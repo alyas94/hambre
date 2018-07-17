@@ -47,22 +47,37 @@ module.exports = {
 
   login: function(req, res) {
     db.Users.findOne({ email: req.body.email })
-      .then(user => {
-        var passwordResult = bcrypt.compareSync(
+      .then(dbModel => {
+        var passwordResult = bcrypt.compare(
           req.body.password,
-          user.password
+          dbModel.password
         );
 
         if (passwordResult) {
-          const tacoJwt = jwt.sign({ id: user._id }, process.env.SECRET);
-          res.status(200).send({ tacoJwt, user });
+          const tacoJwt = jwt.sign({ id: dbModel._id }, process.env.SECRET);
+          res.status(200).send({ tacoJwt, dbModel });
         } else {
           res.status(404).send({ message: "Incorrect Password" });
         }
       })
-      .catch(() =>
-        res.status(400).send({ message: "Could not find your email" })
-      );
+      .catch(err => res.status(422).json({ message: "Still not working" }));
+    // db.Users.findOne({ email: req.body.email })
+    //   .then(user => {
+    //     var passwordResult = bcrypt.compareSync(
+    //       req.body.password,
+    //       user.password
+    //     );
+
+    //     if (passwordResult) {
+    //       const tacoJwt = jwt.sign({ id: user._id }, process.env.SECRET);
+    //       res.status(200).send({ tacoJwt, user });
+    //     } else {
+    //       res.status(404).send({ message: "Incorrect Password" });
+    //     }
+    //   })
+    //   .catch(() =>
+    //     res.status(400).send({ message: "Could not find your email" })
+    //   );
   },
 
   getUser: function(req, res) {
