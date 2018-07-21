@@ -10,14 +10,14 @@ import LockOutline from "@material-ui/icons/LockOutline";
 // import HeaderLinks from "./components/Header/HeaderLinks.jsx";
 // import Footer from "./components/Footer/Footer.jsx";
 import TextField from "@material-ui/core/TextField";
-import GridContainer from "./components/Grid/GridContainer.jsx";
-import GridItem from "./components/Grid/GridItem.jsx";
-import Button from "./components/CustomButtons/Button.jsx";
-import Card from "./components/Card/Card.jsx";
-import CardBody from "./components/Card/CardBody.jsx";
-import CardHeader from "./components/Card/CardHeader.jsx";
-import CardFooter from "./components/Card/CardFooter.jsx";
-import CustomInput from "./components/CustomInput/CustomInput.jsx";
+import GridContainer from "@material-ui/core/GridContainer";
+import GridItem from "@material-ui/core/GridItem";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardBody from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardFooter from "@material-ui/core/CardActions";
+// import CustomInput from "./components/CustomInput/CustomInput.jsx";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 
@@ -83,7 +83,7 @@ class LoginPage extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Navbar/>
+        <Navbar />
         <div
           className={classes.pageHeader}
           style={{
@@ -140,9 +140,8 @@ class LoginPage extends React.Component {
                 </Card>
               </GridItem>
             </GridContainer>
-             
           </div>
-       < Footer / >
+          <Footer />
         </div>
       </div>
     );

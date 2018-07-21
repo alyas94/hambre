@@ -1,40 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import * as Scroll from 'react-scroll';
-// import {
-//   Link,
-//   Element,
-//   Events,
-//   animateScroll as scroll,
-//   scrollSpy,
-//   scroller
-// } from 'react-scroll';
-// @material-ui/core components
-import GridContainer from "./components/Grid/GridContainer.jsx";
-import GridItem from "./components/Grid/GridItem.jsx";
-import Button from "./components/CustomButtons/Button.jsx";
-import Card from "./components/Card/Card.jsx";
-import CardBody from "./components/Card/CardBody.jsx";
-import CardHeader from "./components/Card/CardHeader.jsx";
-import CardFooter from "./components/Card/CardFooter.jsx";
+import GridContainer from "@material-ui/core/GridContainer";
+import GridItem from "@material-ui/core/GridItem";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardBody from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardFooter from "@material-ui/core/CardActions";
 import { withStyles } from "@material-ui/core/styles";
 
 import TextField from "@material-ui/core/TextField";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Input from "@material-ui/core/Input";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
+
 import Footer from "../Footer/Footer";
-import ArrowUp from "@material-ui/icons/KeyboardArrowUp";
 
 import loginPageStyle from "./loginPage.jsx";
 
 import userAPI from "../../utils/userAPI";
 
 import SignUpPrompt from "../SignupPrompt/Login-Signup";
-import { FormInput } from "./components/input/FormInput";
 
 class usersignup extends React.Component {
   constructor(props) {
@@ -200,9 +183,8 @@ class usersignup extends React.Component {
         <ArrowUp />
       </Button> */}
           </div>
-                  < Footer/>
+          <Footer />
         </div>
-
       </div>
     );
   }
