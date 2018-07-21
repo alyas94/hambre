@@ -1,6 +1,6 @@
 import React from "react";
 import MapPage from "./pages/MapPage";
-import SignUp from "./components/SignupPrompt/Login-Signup";
+import SignUp from "./pages/Login-Signup";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import UserSignUP from "./components/SignupLogin/usersignup";
 // import TruckSignUP from "./components/SignupLogin/trucksignhup";
