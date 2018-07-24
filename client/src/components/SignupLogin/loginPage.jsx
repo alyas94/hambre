@@ -7,10 +7,10 @@ const signupPageStyle = {
     paddingTop: "20vh",
     color: "#FFFFFF",
   },
-  cardHidden: {
-    opacity: "0",
-    transform: "translate3d(0, -60px, 0)",
-  },
+  // cardHidden: {
+  //   opacity: "0",
+  //   transform: "translate3d(0, -60px, 0)",
+  // },
   pageHeader: {
     minHeight: "100vh",
     maxHeight: "1200px",

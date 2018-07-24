@@ -1,6 +1,6 @@
 import React from "react";
 import MapPage from "./pages/MapPage";
-import SignUp from "./pages/Login-Signup";
+import SignupPrompt from "./components/SignupPrompt/SignupPrompt";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import UserSignUP from "./components/SignupLogin/usersignup";
 // import TruckSignUP from "./components/SignupLogin/trucksignhup";
@@ -13,7 +13,7 @@ const App = () => (
     <div>
       <Switch>
         <Route exact path="/" component={MapPage} />
-        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/signup" component={SignupPrompt} />
         {/* <Route exact path="/signup-user" component={UserSignUP} /> */}
         {/* <Route exact path="/signup-truck" component={TruckSignUP} /> */}
         <Route exact path="/dashboard/owner" component={OwnerPage} />

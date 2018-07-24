@@ -1,13 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
+// import TruckSignup from "../components/SignupLogin/TruckSignup";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
-
-// import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
 
 const styles = theme => ({
   root: {
@@ -100,7 +99,7 @@ const images = [
   },
 ];
 
-class SignUpPrompt extends React.Component {
+const SignUpPrompt =(props)=> {
   render() {
     const { classes } = this.props;
 

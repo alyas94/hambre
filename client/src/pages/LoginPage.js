@@ -7,11 +7,11 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardBody from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
+// import CardHeader from "@material-ui/core/CardHeader";
 import CardFooter from "@material-ui/core/CardActions";
 import Paper from "@material-ui/core/Typography";
 import Email from "@material-ui/icons/Email";
-import LockOutline from "@material-ui/icons/LockOutline";
+// import LockOutline from "@material-ui/icons/LockOutline";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import ownerAPI from "../utils/ownerAPI";
@@ -19,9 +19,22 @@ import loginPageStyle from "../components/SignupLogin/loginPage.jsx";
 
 class LoginPage extends Component {
   state = {
-    // cardAnimaton: "cardHidden",
     email: "",
     password: "",
+  };
+
+  componentDidMount() {
+    setTimeout(
+      function() {
+        this.scrollToForm();
+      }.bind(this),
+      900
+    );
+  }
+
+  scrollToForm = () => {
+    let mapDiv = ReactDOM.findDOMNode(document.getElementById("scrollToRef"));
+    mapDiv.scrollIntoView({ behavior: "smooth" }, true);
   };
 
   handleChange = name => event => {
@@ -56,22 +69,6 @@ class LoginPage extends Component {
         )
       );
   };
-  componentDidMount() {
-    // we add a hidden class to the card and after 700 ms we delete it and the transition appears
-    setTimeout(
-      function() {
-        // scroll.scrollTo(580);
-        this.scrollToForm();
-        this.setState({ cardAnimaton: "" });
-      }.bind(this),
-      900
-    );
-  }
-
-  scrollToForm = () => {
-    let mapDiv = ReactDOM.findDOMNode(document.getElementById("scrollToRef"));
-    mapDiv.scrollIntoView({ behavior: "smooth" }, true);
-  };
 
   render() {
     const { classes } = this.props;
@@ -92,7 +89,7 @@ class LoginPage extends Component {
           >
             <Card id="scrollToRef" className={classes.card + " containment"}>
               <Paper>
-                <h2 className="cardHeader">Login Page</h2>
+                <h2 className="cardHeader">Log In</h2>
               </Paper>
               <form className={classes.form}>
                 <CardBody>

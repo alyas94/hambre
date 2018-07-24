@@ -1,14 +1,8 @@
 import React from "react";
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
-// @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import LockOutline from "@material-ui/icons/LockOutline";
-// core components
-// import Header from "./components/Header/Header.jsx";
-// import HeaderLinks from "./components/Header/HeaderLinks.jsx";
-// import Footer from "./components/Footer/Footer.jsx";
 import TextField from "@material-ui/core/TextField";
 import GridContainer from "@material-ui/core/GridContainer";
 import GridItem from "@material-ui/core/GridItem";
@@ -17,7 +11,6 @@ import Card from "@material-ui/core/Card";
 import CardBody from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardFooter from "@material-ui/core/CardActions";
-// import CustomInput from "./components/CustomInput/CustomInput.jsx";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 
@@ -92,8 +85,7 @@ class LoginPage extends React.Component {
           }}
         >
           <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={4}>
+          <Grid container {...rest} className={classes.grid + " " + className} justify="center">
                 <Card className={classes[this.state.cardAnimaton]}>
                   <form className={classes.form}>
                     <CardHeader color="primary" className={classes.cardHeader}>
