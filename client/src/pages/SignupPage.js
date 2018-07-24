@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import SelectTruckSU from "./SelectTruckSU";
-import SelectUserSU from "./SelectUserSU";
-import Navbar from "../Navbar/Navbar";
-import TruckSignup from "./TruckSignup";
-import UserSignup from "./UserSignup";
+import SelectTruckSU from "../components/SignupPrompt/SelectTruckSU";
+import SelectUserSU from "../components/SignupPrompt/SelectUserSU";
+import Navbar from "../components/Navbar/Navbar";
+import TruckSignup from "../components/SignupPrompt/TruckSignup";
+import UserSignup from "../components/SignupPrompt/UserSignup";
 
 class SignupPrompt extends Component {
   state = {
