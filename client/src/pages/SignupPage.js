@@ -5,6 +5,7 @@ import SelectUserSU from "../components/SignupPrompt/SelectUserSU";
 import Navbar from "../components/Navbar/Navbar";
 import TruckSignup from "../components/SignupPrompt/TruckSignup";
 import UserSignup from "../components/SignupPrompt/UserSignup";
+import ownerAPI from "../utils/ownerAPI";
 
 class SignupPrompt extends Component {
   state = {
