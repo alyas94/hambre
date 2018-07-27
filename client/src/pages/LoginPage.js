@@ -37,12 +37,6 @@ class LoginPage extends Component {
     mapDiv.scrollIntoView({ behavior: "smooth" }, true);
   };
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.checked,
-    });
-  };
-
   handleInputChange = event => {
     const stateName = event.target.name;
     this.setState({
@@ -95,7 +89,7 @@ class LoginPage extends Component {
                 <CardBody>
                   <TextField
                     value={this.state.email}
-                    onCahnge={this.handleInputChange}
+                    onChange={this.handleInputChange}
                     name="email"
                     type="text"
                     placeholder="Email"
