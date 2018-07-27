@@ -77,7 +77,6 @@ class TruckSignup extends Component {
       foodType: this.state.foodType,
       description: this.state.description,
     };
-    console.log(ownerData);
     ownerAPI.createOwner(ownerData).then(response => {
       localStorage.setItem("tacoJwt", response.data.tacoJwt);
       window.location.href = "/dashboard/owner";
