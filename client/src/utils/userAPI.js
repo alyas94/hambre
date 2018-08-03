@@ -14,14 +14,18 @@ export default {
   },
 
   addFavorite: function(id, truckName) {
-    return axios.put("/api/user" + id, truckName);
+    return axios.post("/api/user" + id, truckName);
   },
 
   addLocation: function(id, userLocation) {
-    return axios.put("/api/user" + id, userLocation);
+    return axios.post("/api/user" + id, userLocation);
   },
 
   getUser: function(userData) {
     return axios.get("/api/user/me", userData);
+  },
+
+  login: function(userData) {
+    return axios.post("/api/user/login", userData);
   },
 };
