@@ -5,10 +5,12 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import LockOutline from "@material-ui/icons/LockOutline";
-// core components
-// import Header from "./components/Header/Header.jsx";
-// import HeaderLinks from "./components/Header/HeaderLinks.jsx";
-// import Footer from "./components/Footer/Footer.jsx";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 import TextField from "@material-ui/core/TextField";
 import GridContainer from "./components/Grid/GridContainer.jsx";
 import GridItem from "./components/Grid/GridItem.jsx";
@@ -58,17 +60,17 @@ class LoginPage extends React.Component {
       password: this.state.password,
     };
 
-    // ownerAPI
-    //   .login(data)
-    //   .then(response => {
-    //     localStorage.setItem("tacoJwt", response.data.tacoJwt);
-    //     window.location.href = "/dashboard/owner";
-    //   })
-    //   .catch(e =>
-    //     alert(
-    //       "Your email or password is incorrect.\n\rEmail is case sensitive. We're working on that still.\n\rSorry about that.\n\rPasswords are always case senstive."
-    //     )
-    //   );
+    ownerAPI
+      .login(data)
+      .then(response => {
+        localStorage.setItem("tacoJwt", response.data.tacoJwt);
+        window.location.href = "/dashboard/owner";
+      })
+      .catch(e =>
+        alert(
+          "Your email or password is incorrect.\n\rEmail is case sensitive. We're working on that still.\n\rSorry about that.\n\rPasswords are always case senstive."
+        )
+      );
 
     userAPI
       .login(data)
@@ -116,6 +118,31 @@ class LoginPage extends React.Component {
 
                     {/*   */}
                     <CardBody>
+                      <FormControl
+                        component="fieldset"
+                        required
+                        className={classes.formControl}
+                      >
+                        <FormLabel component="legend">Gender</FormLabel>
+                        <RadioGroup
+                          aria-label="Gender"
+                          name="gender1"
+                          className={classes.group}
+                          value={this.state.value}
+                          onChange={this.handleChange}
+                        >
+                          <FormControlLabel
+                            value="Hambrista"
+                            control={<Radio />}
+                            label="Female"
+                          />
+                          <FormControlLabel
+                            value="Owner"
+                            control={<Radio />}
+                            label="Male"
+                          />
+                        </RadioGroup>
+                      </FormControl>
                       <TextField
                         value={this.state.email}
                         onChange={this.handleInputChange}
