@@ -15,12 +15,15 @@ import Email from "@material-ui/icons/Email";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import ownerAPI from "../utils/ownerAPI";
+import userAPI from "../utils/userAPI";
 import loginPageStyle from "../components/SignupLogin/loginPage.jsx";
 
 class LoginPage extends Component {
   state = {
     email: "",
     password: "",
+    owner: true,
+    user: true,
   };
 
   componentDidMount() {
@@ -57,12 +60,25 @@ class LoginPage extends Component {
         localStorage.setItem("tacoJwt", response.data.tacoJwt);
         window.location.href = "/dashboard/owner";
       })
-      .catch(e =>
-        alert(
-          "Your email or password is incorrect.\n\rEmail is case sensitive. We're working on that still.\n\rSorry about that.\n\rPasswords are always case senstive."
-        )
-      );
+      .catch(e => this.setState({ owner: false }));
+
+    userAPI
+      .login(data)
+      .then(response => {
+        localStorage.setItem("tacoJwt", response.data.tacoJwt);
+        window.location.href = "/";
+      })
+      .catch(e => this.setState({ user: false }));
   };
+
+  componentDidUpdate() {
+    if (!this.state.owner && !this.state.user) {
+      alert(
+        "Your email or password is incorrect.\n\rEmail is case sensitive. We're working on that still.\n\rSorry about that.\n\rPasswords are always case senstive."
+      );
+      this.setState({ owner: true, user: true });
+    }
+  }
 
   render() {
     const { classes } = this.props;
