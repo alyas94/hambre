@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const SALT_WORK_FACTOR = 10;
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
 // User Schema model
 const userSchema = new Schema({
@@ -48,7 +48,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 userSchema.findByToken = token => {
   let decode;
   try {
-    decode = jwt.verify(token, "secret");
+    decode = jwt.verify(token, process.env.SECRET);
     return userSchema.findOne({ _id: decode._id });
   } catch (e) {
     return Promise.reject();

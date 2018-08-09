@@ -10,14 +10,14 @@ import Grid from "@material-ui/core/Grid";
 
 class MapPage extends Component {
   // componentDidMount() {
-  //   const socket = io.connect("http://localhost:3000/");
+  //   const socket = io.connect("/");
   //   socket.on("send to clients", message => this.messageReceive(message));
   // }
 
   // messageReceive(message) {
   //   console.log(JSON.stringify(message));
-  // const messages = [...this.state.messages, message];
-  // this.setState({messages})
+  //   const messages = [...this.state.messages, message];
+  //   this.setState({ messages });
   // }
 
   render() {

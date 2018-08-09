@@ -10,7 +10,7 @@ export default class MessageModal extends Component {
   };
 
   componentDidMount() {
-    const socket = io.connect("http://localhost:3000/");
+    const socket = io.connect("/");
     socket.on("send to clients", message => this.messageReceive(message));
   }
 
